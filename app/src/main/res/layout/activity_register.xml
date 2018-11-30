@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/pink"
+    tools:context=".registration.RegisterActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="24dp"
+
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:src="@drawable/resolute"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="14sp"
+            android:text="Resolving conflict using technology"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fullName"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="32dp"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:paddingLeft="10dp"
+            android:textColor="@color/white"
+            android:layout_marginTop="8dp"
+            android:inputType="textPersonName"
+            android:imeOptions="actionNext"
+            android:singleLine="true"
+            android:background="@drawable/edit_text_reg_bg"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/community"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="16dp"
+            />
+
+        <EditText
+            android:paddingLeft="10dp"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp"
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            android:inputType="textPersonName"
+            android:background="@drawable/edit_text_reg_bg"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phone number"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="16dp"
+            />
+
+        <EditText
+            android:paddingLeft="10dp"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:imeOptions="actionNext"
+            android:digits="1234567890"
+            android:inputType="number"
+            android:singleLine="true"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/edit_text_reg_bg"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pin (a 4-digit number for security)"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="16dp"
+            />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:passwordToggleTint="#FFF"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:paddingLeft="10dp"
+                android:textColor="@color/white"
+                android:id="@+id/pin"
+                android:digits="1234567890"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:background="@drawable/edit_text_reg_bg"
+                android:inputType="numberPassword"
+                android:singleLine="true" />
+
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <Button
+            android:id = "@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/btn_green"
+            android:textSize = "16sp"
+            android:text="REGISTER"
+            android:textColor="#FFFF"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:text="Already have an account?"
+                />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+android:textSize="12sp"
+    android:paddingLeft="4dp"
+    android:textStyle="bold"
+    android:textColor="#1565C0"
+    android:text="SIGN IN"
+    />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

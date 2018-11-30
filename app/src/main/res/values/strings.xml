@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Resolute4.0</string>
+    <string name="fullName">Full name</string>
+    <string name="community">Community</string>
 </resources>
