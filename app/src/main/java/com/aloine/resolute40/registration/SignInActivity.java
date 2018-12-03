@@ -15,7 +15,9 @@ public class SignInActivity extends AppCompatActivity {
 
         getWindow().setFlags(
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+                WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION
+
+
         );
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/pink"
+    android:background="#ededed"
     tools:context=".registration.RegisterActivity">
 
     <LinearLayout
@@ -24,6 +24,7 @@
         <ImageView
             android:layout_width="150dp"
             android:layout_height="40dp"
+            android:layout_gravity="center"
             android:src="@drawable/resolute"
             />
 
@@ -32,8 +33,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textSize="14sp"
+            android:gravity="center"
             android:text="Resolving conflict using technology"
-            android:textColor="@color/white"
+            android:textColor="#4fb752"
             />
 
         <TextView
@@ -41,7 +43,7 @@
             android:layout_height="wrap_content"
             android:text="@string/fullName"
             android:textSize="12sp"
-            android:textColor="@color/white"
+            android:textColor="#267187"
             android:layout_marginTop="32dp"
             />
 
@@ -49,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:paddingLeft="10dp"
-            android:textColor="@color/white"
+            android:textColor="@android:color/black"
             android:layout_marginTop="8dp"
             android:inputType="textPersonName"
             android:imeOptions="actionNext"
@@ -61,15 +63,15 @@
             android:layout_height="wrap_content"
             android:text="@string/community"
             android:textSize="12sp"
-            android:textColor="@color/white"
+            android:textColor="#267187"
             android:layout_marginTop="16dp"
             />
 
         <EditText
             android:paddingLeft="10dp"
-            android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="45dp"
+            android:textColor="@android:color/black"
             android:layout_marginTop="8dp"
             android:singleLine="true"
             android:imeOptions="actionNext"
@@ -81,13 +83,13 @@
             android:layout_height="wrap_content"
             android:text="Phone number"
             android:textSize="12sp"
-            android:textColor="@color/white"
+            android:textColor="#267187"
             android:layout_marginTop="16dp"
             />
 
         <EditText
             android:paddingLeft="10dp"
-            android:textColor="@color/white"
+            android:textColor="@android:color/black"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:imeOptions="actionNext"
@@ -103,7 +105,7 @@
             android:layout_height="wrap_content"
             android:text="Pin (a 4-digit number for security)"
             android:textSize="12sp"
-            android:textColor="@color/white"
+            android:textColor="#267187"
             android:layout_marginTop="16dp"
             />
 
@@ -116,7 +118,7 @@
 
             <EditText
                 android:paddingLeft="10dp"
-                android:textColor="@color/white"
+                android:textColor="@android:color/black"
                 android:id="@+id/pin"
                 android:digits="1234567890"
                 android:layout_width="match_parent"
@@ -150,7 +152,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:textColor="#267187"
                 android:textSize="12sp"
                 android:text="Already have an account?"
                 />
@@ -159,8 +161,8 @@
     android:layout_height="wrap_content"
 android:textSize="12sp"
     android:paddingLeft="4dp"
-    android:textStyle="bold"
-    android:textColor="#1565C0"
+
+    android:textColor="#02B0EF"
     android:text="SIGN IN"
     />
 

@@ -3,121 +3,121 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:fitsSystemWindows="false"
     android:layout_height="match_parent"
-    >
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:background = "@color/pink"
-    android:layout_height="match_parent"
-    tools:context=".registration.SignInActivity">
+    android:fitsSystemWindows="false">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="162dp"
-        android:layout_marginBottom="423dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:layout_width="180dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:src="@drawable/resolute" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:text="Resolving conflict using technology"
-            android:textColor="@color/white"
-            android:textSize="15sp" />
-
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="93dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Enter PIN"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+        android:layout_height="match_parent"
+        android:background="#267187"
+        tools:context=".registration.SignInActivity">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="162dp"
+            android:layout_marginBottom="423dp"
             android:gravity="center"
-            android:layout_marginTop="32dp"
-            android:layout_height="wrap_content">
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:gravity="center"
-          android:maxLength="1"
-            android:textColor="@color/white"
-            android:inputType="numberPassword"
-            android:background="@drawable/edit_text_pin_bg"
-            />
-            <EditText
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="16dp"
-                android:gravity="center"
-                android:maxLength="1"
-                android:inputType="numberPassword"
+            <ImageView
+                android:layout_width="180dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:src="@drawable/resolute" />
 
-                android:textColor="@color/white"
-                android:background="@drawable/edit_text_pin_bg"
-                />
-            <EditText
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:maxLength="1"
-                android:inputType="numberPassword"
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:gravity="center"
+                android:text="Resolving conflict using technology"
                 android:textColor="@color/white"
-                android:layout_marginLeft="16dp"
-                android:background="@drawable/edit_text_pin_bg"
-                />
-            <EditText
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:textColor="@color/white"
-                android:gravity="center"
-                android:inputType="numberPassword"
-                android:maxLength="1"
-                android:layout_marginLeft="16dp"
-                android:background="@drawable/edit_text_pin_bg"
-                />
+                android:textSize="15sp" />
 
 
         </LinearLayout>
-    </LinearLayout>
 
 
-</android.support.constraint.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="93dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Enter PIN"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/edit_text_pin_bg"
+                    android:gravity="center"
+
+                    android:inputType="numberPassword"
+                    android:maxLength="1"
+                    android:textColor="@color/white" />
+
+                <EditText
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="16dp"
+                    android:background="@drawable/edit_text_pin_bg"
+                    android:gravity="center"
+                    android:inputType="numberPassword"
+
+                    android:maxLength="1"
+                    android:textColor="@color/white" />
+
+                <EditText
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="16dp"
+                    android:background="@drawable/edit_text_pin_bg"
+
+                    android:gravity="center"
+                    android:inputType="numberPassword"
+                    android:maxLength="1"
+                    android:textColor="@color/white" />
+
+                <EditText
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="16dp"
+                    android:background="@drawable/edit_text_pin_bg"
+                    android:gravity="center"
+                    android:inputType="numberPassword"
+                    android:maxLength="1"
+                    android:textColor="@color/white" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>
