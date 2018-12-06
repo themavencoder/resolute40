@@ -6,68 +6,116 @@
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:background="@color/colorPrimary"
+            android:id="@+id/toolbar"
+
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:text="Current Location"
+                />
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
    <LinearLayout
        android:layout_width="match_parent"
-       android:layout_height="56dp"
-       android:layout_marginLeft="16dp"
-       android:background="@color/white"
-       android:orientation="horizontal"
+       android:layout_height="match_parent"
+       android:weightSum="10"
+       android:background="#ededed"
+       android:orientation="vertical"
        >
 
-       <ImageView
-           android:layout_width="wrap_content"
+       <LinearLayout
+           android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:src="@drawable/ic_keyboard_arrow_left_black_24dp"
-           android:layout_gravity="center"
-           />
-       <TextView
-           android:layout_width="wrap_content"
+           android:layout_marginRight="16dp"
+           android:layout_marginTop="16dp"
+           android:layout_marginLeft="16dp"
+           android:orientation="vertical"
+           android:layout_weight="1"
+           >
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="To begin, click on the button below to start mapping "
+               />
+           <Button
+               android:id="@+id/getParameters"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="16dp"
+               android:background="#FDD835"
+               android:onClick="getLocation"
+               android:text="GET LOCATION"
+               android:textColor="@color/white" />
+
+
+       </LinearLayout>
+
+       <LinearLayout
+           android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:textColor="#000"
-           android:layout_marginLeft="8dp"
-           android:text="Current location"
-           android:textSize="16sp"
-           android:layout_gravity="center"
-           />
+           android:layout_marginLeft="16dp"
+           android:layout_marginRight="16dp"
+           android:orientation="vertical"
+           android:layout_weight="6"
+           >
+
+           <com.github.ybq.android.spinkit.SpinKitView
+               xmlns:app="http://schemas.android.com/apk/res-auto"
+               android:id="@+id/spin_kit"
+               style="@style/SpinKitView.Large.DoubleBounce"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:layout_gravity="center"
+               app:SpinKit_Color="@color/colorAccent" />
+       </LinearLayout>
+
+
 
 
    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:weightSum="10"
-        android:orientation="vertical">
 
-        <Button
-            android:layout_width="match_parent"
+
+        <!--<Button
             android:id="@+id/getParameters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
             android:background="@drawable/btn_green"
-            android:text="GET LOCATION"
             android:onClick="getLocation"
-            android:textColor="@color/white"
-            android:layout_height="wrap_content" />
+            android:text="GET LOCATION"
+            android:textColor="@color/white" />
 
-
+--><!--
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
             android:id="@+id/latitude"
-            android:text="LATITUDE IS"
-            android:textSize="24sp"
-            />
-
-        <TextView
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:text="LATITUDE IS"
+            android:textSize="24sp" />
+
+        <TextView
             android:id="@+id/longitude"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:text="LONGITUDE IS"
-            android:textSize="24sp"
-            />
-        </LinearLayout>
-
-
-
+            android:textSize="24sp" />-->
     </LinearLayout>
+
+
+
+
 
 
 

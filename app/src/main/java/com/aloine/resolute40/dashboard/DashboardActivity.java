@@ -50,7 +50,7 @@ public class DashboardActivity extends AppCompatActivity {
                     switch (finalI) {
                         case 0:
                             Toast.makeText(DashboardActivity.this, "Map your farm is clicked", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(DashboardActivity.this,MapsActivity.class));
+                            startActivity(new Intent(DashboardActivity.this, com.aloine.resolute40.smartLocation.MapsActivity.class));
                             break;
                         case 1:
                             Toast.makeText(DashboardActivity.this, "Activate panic button", Toast.LENGTH_SHORT).show();

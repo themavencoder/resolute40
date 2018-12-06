@@ -12,6 +12,7 @@
     <style name="AppTheme.NoActionBar" parent="Base.Theme.AppCompat.Light">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name = "android:textColorSecondary">@color/white</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowActionBarOverlay">true</item>
 

@@ -51,7 +51,7 @@ public class MapsActivity extends AppCompatActivity {
     SimpleLocation.Point position;
     Context context = this;
     boolean requireFineGranularity = true;
-    boolean passiveMode = false;
+    boolean passiveMode = true;
     long updateIntervalInMilliseconds = 2000;
     boolean requireNewLocation = true;
 
@@ -59,6 +59,7 @@ public class MapsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_maps);
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 2);
@@ -66,7 +67,7 @@ public class MapsActivity extends AppCompatActivity {
         location = new SimpleLocation(context, requireFineGranularity, passiveMode, updateIntervalInMilliseconds, requireNewLocation);
     // position =  location.getPosition();
 
-        init();
+
 
         // if we can't access the location yet
         if (!location.hasLocationEnabled()) {
@@ -77,10 +78,10 @@ public class MapsActivity extends AppCompatActivity {
 
     }
 
-    private void init() {
+    /*private void init() {
         latitude = findViewById(R.id.latitude);
         longitude = findViewById(R.id.longitude);
-    }
+    }*/
 
 
     public void getLocation(View view) {
@@ -96,6 +97,7 @@ public class MapsActivity extends AppCompatActivity {
         super.onResume();
 
         location.beginUpdates();
+
     }
 
     @Override

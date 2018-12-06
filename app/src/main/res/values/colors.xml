@@ -6,5 +6,6 @@
     <color name="regButtonColor">#4CAF50</color>
     <color name = "pink">#F06292</color>
     <color name="white">#FFFFFF</color>
+    <color name="ash">#ededed</color>
 
 </resources>
