@@ -2,4 +2,6 @@
     <string name="app_name">Resolute4.0</string>
     <string name="fullName">Full name</string>
     <string name="community">Community</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps_AIzaSyARHqGvIzYY0UPhmzU0Q8Z1uUTSC125eLw">Map</string>
 </resources>
