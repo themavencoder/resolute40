@@ -2,15 +2,18 @@ package com.aloine.resolute40.dashboard;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
 import android.widget.GridLayout;
 import android.widget.Toast;
 
 import com.aloine.resolute40.R;
 import com.aloine.resolute40.map.MapsActivity;
+import com.aloine.resolute40.smartLocation.StartMappingActivity;
 
 
 public class DashboardActivity extends AppCompatActivity {
@@ -25,6 +28,8 @@ public class DashboardActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         init();
+        Window window = this.getWindow();
+        window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
 
        /* if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("");
@@ -50,7 +55,7 @@ public class DashboardActivity extends AppCompatActivity {
                     switch (finalI) {
                         case 0:
                             Toast.makeText(DashboardActivity.this, "Map your farm is clicked", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(DashboardActivity.this, com.aloine.resolute40.smartLocation.MapsActivity.class));
+                            startActivity(new Intent(DashboardActivity.this, StartMappingActivity.class));
                             break;
                         case 1:
                             Toast.makeText(DashboardActivity.this, "Activate panic button", Toast.LENGTH_SHORT).show();

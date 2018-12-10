@@ -47,9 +47,14 @@
             android:name=".map.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".mapper.MapsActivity" />
-        <activity android:name=".smartLocation.MapsActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            ></activity>
+        <activity
+            android:name=".smartLocation.MapsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".smartLocation.StartMappingActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".smartLocation.ViewMappedFarmActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

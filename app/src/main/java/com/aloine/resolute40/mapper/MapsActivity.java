@@ -10,10 +10,12 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aloine.resolute40.R;
+import com.aloine.resolute40.smartLocation.dialog.MyDialog;
 
 public class MapsActivity extends AppCompatActivity implements LocationListener {
     private static final int REQUEST_LOCATION = 1;
@@ -21,6 +23,7 @@ public class MapsActivity extends AppCompatActivity implements LocationListener 
     private TextView latitude, longitude;
     private double  lat_d, long_d;
     private static int check = 0;
+    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,5 +91,10 @@ public class MapsActivity extends AppCompatActivity implements LocationListener 
     @Override
     public void onProviderDisabled(String s) {
 
+    }
+
+    public void pauseMap(View view) {
+        MyDialog myDialog = new MyDialog();
+        myDialog.show(getSupportFragmentManager(),"my_dialog_fragment");
     }
 }

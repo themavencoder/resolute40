@@ -1,69 +1,165 @@
 package com.aloine.resolute40.smartLocation;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.pm.PackageManager;
+import android.animation.ObjectAnimator;
 import android.location.Location;
 import android.location.LocationManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aloine.resolute40.AppInstance;
 import com.aloine.resolute40.R;
+import com.aloine.resolute40.smartLocation.dialog.MyDialog;
+import com.github.ybq.android.spinkit.style.DoubleBounce;
+import com.google.android.gms.location.DetectedActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import io.nlopez.smartlocation.OnActivityUpdatedListener;
 import io.nlopez.smartlocation.OnLocationUpdatedListener;
 import io.nlopez.smartlocation.SmartLocation;
+import io.nlopez.smartlocation.location.providers.LocationBasedOnActivityProvider;
 
 public class MapsActivity extends AppCompatActivity {
     private static final int REQUEST_LOCATION = 1;
     private LocationManager locationManager;
     private TextView latitude, longitude;
-    private double  lat_d, long_d;
+    private double lat_d, long_d;
     private static int check = 0;
+    private DoubleBounce doubleBounce;
+    private ProgressBar progressBar;
+    private ObjectAnimator progressAnimator;
+    private Double lat_temp = 0.00;
+    private Double long_temp = 0.00;
+    private Button button;
+    private List<ArrayList<Double>> pointsList = new ArrayList<>();
+    private Double d_lat = 0.00;
+    private Double d_long = 0.00;
+    private AppInstance appInstance;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        Window window = this.getWindow();
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+        button = findViewById(R.id.btn_pause);
+        init();
+       /*progressBar = findViewById(R.id.spin_kit);
 
- Toolbar toolbar =  findViewById(R.id.toolbar);
+       doubleBounce = new DoubleBounce();
+       doubleBounce.setScale(0.8f);
+
+        progressBar.setIndeterminateDrawable(doubleBounce);
+*/
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("");
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        getLocation();
 
 
     }
 
+    public void pauseMap(View view) {
+        MyDialog myDialog = new MyDialog();
+        myDialog.show(getSupportFragmentManager(), "my_dialog");
+    }
 
-    /*private void init() {
+
+    private void init() {
         latitude = findViewById(R.id.latitude);
         longitude = findViewById(R.id.longitude);
-    }*/
+    }
 
 
-    public void getLocation(View view) {
+    public void getLocation() {
         SmartLocation.with(this).location().getLastLocation();
         SmartLocation.with(this).location().start(new OnLocationUpdatedListener() {
             @Override
             public void onLocationUpdated(Location location) {
-                location.getLatitude();
-                latitude.setText(String.valueOf(location.getLatitude()));
-                longitude.setText(String.valueOf(location.getLongitude()));
+
+
+                 d_lat = location.getLatitude();
+                 d_long = location.getLongitude();
+                if (d_lat != null && d_long != null) {
+                    latitude.setText(String.valueOf(location.getLatitude()));
+                    longitude.setText(String.valueOf(location.getLongitude()));
+
+                    if ((lat_temp != d_lat) || (long_temp != d_long)) {
+                        if (latitude.getText().toString().equals(String.valueOf(lat_temp)) || longitude.getText().toString().equals(String.valueOf(long_temp)))  {
+
+                        } else {
+                            ArrayList<Double> d1 = new ArrayList<>();
+                            d1.add(d_lat);
+                            d1.add(d_long);
+                            pointsList.add(d1);
+                            appInstance = AppInstance.getInstance();
+                            appInstance.setPointsList(pointsList);
+                            Toast.makeText(MapsActivity.this, "The length of the real list is " + pointsList.size(), Toast.LENGTH_SHORT).show();
+                            lat_temp = d_lat;
+                            long_temp = d_long;
+
+                        }
+
+                    }
+                    getLocation();
+
+                }
+
+
+
+
+              //   Toast.makeText(MapsActivity.this, "The length of the real list is " + pointsList.size(), Toast.LENGTH_SHORT).show();
+
             }
+
         });
 
 
 
+
+           /* if ((lat_temp != d_lat) || (long_temp != d_long)) {
+                ArrayList<Double> d1 = new ArrayList<>();
+                d1.add(d_lat);
+                d1.add(d_long);
+                pointsList.add(d1);
+                Toast.makeText(MapsActivity.this, "The length of the real list is " + pointsList.size(), Toast.LENGTH_SHORT).show();
+                lat_temp = d_lat;
+                long_temp = d_long;
+
+
+
+            }*/
+           //  Toast.makeText(MapsActivity.this, "The length of the real list is " + pointsList.size(), Toast.LENGTH_SHORT).show();
+
+
+        }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        SmartLocation.with(this).location().stop();
+        pointsList.clear();
     }
-
-
-
 }
+
+
+

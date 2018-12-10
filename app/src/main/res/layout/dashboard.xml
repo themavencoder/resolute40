@@ -32,15 +32,16 @@ android:layout_height="match_parent">
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_below="@id/toolbar"
-        android:background="#D3D3D3"
+        android:background="@color/white"
         android:weightSum="10"
         tools:context=".dashboard.DashboardActivity">
 
 
     <RelativeLayout
-            android:layout_weight="2" android:layout_width="match_parent"
-            android:background="@drawable/rv_background"
-            android:layout_height="40dp">
+            android:layout_weight="1"
+        android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="20dp">
 
         <ImageView
             android:id="@+id/textGrid"
@@ -62,7 +63,7 @@ android:layout_height="match_parent">
             android:columnCount="2"
             android:alignmentMode="alignMargins"
             android:columnOrderPreserved="false"
-            android:layout_weight="8"
+            android:layout_weight="7"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:padding="8dp">
@@ -95,7 +96,7 @@ android:layout_height="match_parent">
                         android:src="@drawable/ic_map"
                         android:layout_gravity="center_horizontal"
                         android:layout_width="100dp"
-                        android:layout_height="80dp" />
+                        android:layout_height="60dp" />
 
                     <TextView
                         android:textAlignment="center"
@@ -137,7 +138,7 @@ android:layout_height="match_parent">
                         android:src="@drawable/ic_placeholder"
                         android:layout_gravity="center_horizontal"
                         android:layout_width="100dp"
-                        android:layout_height="80dp" />
+                        android:layout_height="60dp" />
 
                     <TextView
                         android:textAlignment="center"
@@ -181,7 +182,7 @@ android:layout_height="match_parent">
                         android:src="@drawable/ic_map_farm"
                         android:layout_gravity="center_horizontal"
                         android:layout_width="100dp"
-                        android:layout_height="80dp" />
+                        android:layout_height="60dp" />
 
                     <TextView
                         android:textAlignment="center"
@@ -222,7 +223,7 @@ android:layout_height="match_parent">
                         android:src="@drawable/ic_map_farm"
                         android:layout_gravity="center_horizontal"
                         android:layout_width="100dp"
-                        android:layout_height="80dp" />
+                        android:layout_height="60dp" />
 
                     <TextView
                         android:textAlignment="center"
@@ -241,6 +242,10 @@ android:layout_height="match_parent">
 
 
         </GridLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="2"
+            android:layout_height="0dp"></LinearLayout>
 
 
     </LinearLayout>

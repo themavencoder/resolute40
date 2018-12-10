@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 
 import com.aloine.resolute40.R;
+import com.aloine.resolute40.smartLocation.dialog.MyDialog;
 
 import im.delight.android.location.SimpleLocation;
 
@@ -104,5 +105,10 @@ public class MapsActivity extends AppCompatActivity {
     protected void onPause() {
         location.endUpdates();
         super.onPause();
+    }
+
+    public void pauseMap(View view) {
+        MyDialog myDialog = new MyDialog();
+        myDialog.show(getSupportFragmentManager(), "my_dialog");
     }
 }

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/exit_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginRight="16dp"
+        android:layout_gravity="end"
+        android:src="@drawable/cancel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="40dp"
+        android:text="Please enter an option for you to continue"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+
+        />
+    
+    <Button
+        android:id="@+id/save_mapping"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="34dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/btn_white"
+        android:text="Save Mapping"
+        android:paddingLeft="55dp"
+        android:paddingRight="60dp"
+        android:drawableLeft="@drawable/save"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
+
+        />
+
+    <Button
+        android:id="@+id/continue_mapping"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/btn_blue"
+        android:text="Continue Mapping"
+        android:paddingLeft="55dp"
+        android:paddingRight="60dp"
+        android:drawableLeft="@drawable/play_button"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:layout_marginBottom="32dp"
+        android:textColor="@color/white"
+
+        />
+</LinearLayout>
