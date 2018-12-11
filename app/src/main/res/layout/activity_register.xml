@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".auth.register.activity.RegisterActivity">
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/ash"
-    tools:context=".registration.RegisterActivity">
+    tools:context=".auth.register.activity.RegisterActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +22,7 @@
         android:layout_marginStart="24dp"
 
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:orientation="vertical"
@@ -25,146 +34,144 @@
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:src="@drawable/resolute"
-            />
+            android:src="@drawable/resolute" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textSize="14sp"
             android:gravity="center"
             android:text="Resolving conflict using technology"
             android:textColor="#4fb752"
-            />
+            android:textSize="14sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/fullName"
-            android:textSize="12sp"
-            android:textColor="#267187"
             android:layout_marginTop="32dp"
-            />
+            android:text="@string/fullName"
+            android:textColor="#267187"
+            android:textSize="12sp" />
 
         <EditText
+            android:id="@+id/edit_full_name"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:paddingLeft="10dp"
-            android:textColor="@android:color/black"
             android:layout_marginTop="8dp"
-            android:inputType="textPersonName"
+            android:background="@drawable/edit_text_reg_bg"
             android:imeOptions="actionNext"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
             android:singleLine="true"
-            android:background="@drawable/edit_text_reg_bg"/>
+            android:textColor="@android:color/black" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="@string/community"
-            android:textSize="12sp"
             android:textColor="#267187"
-            android:layout_marginTop="16dp"
-            />
+            android:textSize="12sp" />
 
         <EditText
-            android:paddingLeft="10dp"
+            android:id="@+id/edit_community"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:textColor="@android:color/black"
             android:layout_marginTop="8dp"
-            android:singleLine="true"
+            android:background="@drawable/edit_text_reg_bg"
             android:imeOptions="actionNext"
             android:inputType="textPersonName"
-            android:background="@drawable/edit_text_reg_bg"/>
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:textColor="@android:color/black" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Phone number"
-            android:textSize="12sp"
-            android:textColor="#267187"
             android:layout_marginTop="16dp"
-            />
+            android:text="Phone number"
+            android:textColor="#267187"
+            android:textSize="12sp" />
 
         <EditText
-            android:paddingLeft="10dp"
-            android:textColor="@android:color/black"
+            android:id="@+id/edit_phone_number"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:imeOptions="actionNext"
-            android:digits="1234567890"
-            android:inputType="number"
-            android:singleLine="true"
             android:layout_marginTop="8dp"
-            android:background="@drawable/edit_text_reg_bg"/>
+            android:background="@drawable/edit_text_reg_bg"
+            android:digits="1234567890"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:textColor="@android:color/black" />
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pin (a 4-digit number for security)"
-            android:textSize="12sp"
-            android:textColor="#267187"
             android:layout_marginTop="16dp"
-            />
+            android:text="Pin (a 4-digit number for security)"
+            android:textColor="#267187"
+            android:textSize="12sp" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            app:passwordToggleTint="#FFF"
-            app:passwordToggleEnabled="true">
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="#FFF">
 
             <EditText
-                android:paddingLeft="10dp"
-                android:textColor="@android:color/black"
-                android:id="@+id/pin"
-                android:digits="1234567890"
+                android:id="@+id/edit_pin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:imeOptions="actionDone"
                 android:background="@drawable/edit_text_reg_bg"
+                android:digits="1234567890"
+                android:imeOptions="actionDone"
                 android:inputType="numberPassword"
-                android:singleLine="true" />
+                android:paddingLeft="10dp"
+                android:singleLine="true"
+                android:textColor="@android:color/black" />
 
 
         </android.support.design.widget.TextInputLayout>
 
 
         <Button
-            android:id = "@+id/btn_register"
+            android:id="@+id/button_register"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/btn_green"
-            android:textSize = "16sp"
             android:text="REGISTER"
+
             android:textColor="#FFFF"
-            />
+            android:textSize="16sp" />
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal"
+            android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:layout_height="wrap_content">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#267187"
-                android:textSize="12sp"
                 android:text="Already have an account?"
-                />
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-android:textSize="12sp"
-    android:paddingLeft="4dp"
+                android:textColor="#267187"
+                android:textSize="12sp" />
 
-    android:textColor="#02B0EF"
-    android:text="SIGN IN"
-    />
+            <TextView
+                android:id="@+id/text_sign_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="4dp"
+
+                android:text="SIGN IN"
+                android:textColor="#02B0EF"
+                android:textSize="12sp" />
 
         </LinearLayout>
 
@@ -173,3 +180,4 @@ android:textSize="12sp"
 
 
 </android.support.constraint.ConstraintLayout>
+</android.support.design.widget.CoordinatorLayout>

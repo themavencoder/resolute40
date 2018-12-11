@@ -15,7 +15,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.aloine.resolute40.R;
+import com.aloine.resolute40.smartLocation.StartMappingActivity;
 import com.aloine.resolute40.smartLocation.ViewMappedFarmActivity;
+
+import io.nlopez.smartlocation.SmartLocation;
 
 public class MyDialog extends DialogFragment {
 
@@ -41,6 +44,7 @@ public class MyDialog extends DialogFragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "Your settings has been saved", Toast.LENGTH_SHORT).show();
+                SmartLocation.with(view.getContext()).location().stop();
                 view.getContext().startActivity(new Intent(view.getContext().getApplicationContext(), ViewMappedFarmActivity.class));
             }
         });

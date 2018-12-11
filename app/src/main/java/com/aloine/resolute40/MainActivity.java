@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
-import com.aloine.resolute40.registration.RegisterActivity;
-import com.aloine.resolute40.registration.SignInActivity;
+import com.aloine.resolute40.auth.register.activity.RegisterActivity;
+import com.aloine.resolute40.auth.login.SignInActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button mButtonSignIn, mButtonRegister;
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void init() {
-        mButtonRegister =findViewById(R.id.btn_register);
+        mButtonRegister =findViewById(R.id.button_register);
         mButtonRegister.setOnClickListener(this);
         mButtonSignIn = findViewById(R.id.btn_sign_in);
         mButtonSignIn.setOnClickListener(this);
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn_register:
+            case R.id.button_register:
                 startActivity(new Intent(this,RegisterActivity.class));
                 break;
             case R.id.btn_sign_in:

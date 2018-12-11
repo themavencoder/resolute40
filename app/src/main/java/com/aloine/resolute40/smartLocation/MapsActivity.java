@@ -19,6 +19,7 @@ import com.aloine.resolute40.R;
 import com.aloine.resolute40.smartLocation.dialog.MyDialog;
 import com.github.ybq.android.spinkit.style.DoubleBounce;
 import com.google.android.gms.location.DetectedActivity;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,13 @@ public class MapsActivity extends AppCompatActivity {
     private Double lat_temp = 0.00;
     private Double long_temp = 0.00;
     private Button button;
-    private List<ArrayList<Double>> pointsList = new ArrayList<>();
+    private ArrayList<ArrayList<Double>> pointsList = new ArrayList<>();
+    private ArrayList<LatLng> realList = new ArrayList<>();
+    private ArrayList<ArrayList<LatLng>> pointsListLatlng = new ArrayList<>();
+    private List<LatLng> pointsLatlngAsList = new ArrayList<>();
+    private ArrayList<Double> arrLatitude = new ArrayList<>();
+    private ArrayList<Double> arrLongitude = new ArrayList<>();
+    private Iterable<LatLng> pointIterable = new ArrayList<>();
     private Double d_lat = 0.00;
     private Double d_long = 0.00;
     private AppInstance appInstance;
@@ -108,11 +115,24 @@ public class MapsActivity extends AppCompatActivity {
 
                         } else {
                             ArrayList<Double> d1 = new ArrayList<>();
+                            ArrayList<LatLng> d2 = new ArrayList<>();
                             d1.add(d_lat);
                             d1.add(d_long);
+                            d2.add(new LatLng(d_lat,d_long));
+                            arrLatitude.add(d_lat);
+                            arrLongitude.add(d_long);
+                            pointsListLatlng.add(d2);
+                            pointsLatlngAsList.add(new LatLng(d_lat,d_long));
                             pointsList.add(d1);
+
                             appInstance = AppInstance.getInstance();
                             appInstance.setPointsList(pointsList);
+                            appInstance.setPointsListLatlng(pointsListLatlng);
+                            appInstance.setPointsLatlngAsList(pointsLatlngAsList);
+                            appInstance.setArrLatitude(arrLatitude);
+                            appInstance.setArrLongitude(arrLongitude);
+                            realList.add(new LatLng(d_lat,d_long));
+                            appInstance.setRealList(realList);
                             Toast.makeText(MapsActivity.this, "The length of the real list is " + pointsList.size(), Toast.LENGTH_SHORT).show();
                             lat_temp = d_lat;
                             long_temp = d_long;

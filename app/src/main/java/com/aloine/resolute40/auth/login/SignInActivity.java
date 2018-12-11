@@ -1,8 +1,7 @@
-package com.aloine.resolute40.registration;
+package com.aloine.resolute40.auth.login;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.method.PasswordTransformationMethod;
 import android.view.WindowManager;
 import android.widget.EditText;
 
