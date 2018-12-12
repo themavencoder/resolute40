@@ -1,5 +1,7 @@
 package com.aloine.resolute40.auth.login.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class LoginModel {
 
     private String pinOne;
@@ -7,8 +9,11 @@ public class LoginModel {
     private String pinThree;
     private String pinFour;
 
-
+    @SerializedName("pin")
     private String concatPin;
+
+    @SerializedName("phone")
+    private String phone;
 
 
     public LoginModel() {
@@ -23,9 +28,18 @@ public class LoginModel {
 
     }
 
-    public LoginModel(String concatPin) {
+    public LoginModel(String phone, String concatPin) {
         this.concatPin = concatPin;
+        this.phone = phone;
 
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getConcatPin() {

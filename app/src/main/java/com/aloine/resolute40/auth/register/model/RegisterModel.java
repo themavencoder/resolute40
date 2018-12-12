@@ -7,8 +7,8 @@ public class RegisterModel {
     @SerializedName("full_name")
     private String full_name;
 
-    @SerializedName("phone_number")
-    private String phone_number;
+    @SerializedName("phone")
+    private String phone;
 
     @SerializedName("community")
     private String community;
@@ -25,7 +25,7 @@ public class RegisterModel {
     public RegisterModel(String full_name, String phone_number, String community, String pin) {
 
         this.full_name = full_name;
-        this.phone_number = phone_number;
+        this.phone = phone_number;
         this.community = community;
         this.pin = pin;
     }
@@ -39,12 +39,12 @@ public class RegisterModel {
         this.full_name = full_name;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getCommunity() {

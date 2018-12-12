@@ -47,8 +47,6 @@ public class SignInActivity extends AppCompatActivity implements LoginContract.V
         screenDisplay();
         statusColor();
         init();
-        model = new LoginModel(mPresenter.concatPin());
-        performNetworkLogin(model);
 
     }
 
@@ -112,6 +110,8 @@ public class SignInActivity extends AppCompatActivity implements LoginContract.V
                 mPresenter.concatPin();
                 mLoginDialog.setCancelable(false);
                 mLoginDialog.show(getSupportFragmentManager(), "my_dialog");
+                model = new LoginModel("07035184047",mPresenter.concatPin());
+
                 performNetworkLogin(model);
 
 
@@ -137,7 +137,7 @@ public class SignInActivity extends AppCompatActivity implements LoginContract.V
                     mLoginDialog.dismiss();
                     startActivity(new Intent(SignInActivity.this, DashboardActivity.class));
                 }
-                if (response.body().getResponse().equals("failure")) ;
+                if (response.body().getResponse().equals("failed")) ;
                 mLoginDialog.dismiss();
                 wrongPin(model);
 
