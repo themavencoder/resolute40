@@ -8,7 +8,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 import com.aloine.resolute40.auth.register.activity.RegisterActivity;
-import com.aloine.resolute40.auth.login.SignInActivity;
+import com.aloine.resolute40.auth.login.activity.SignInActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button mButtonSignIn, mButtonRegister;

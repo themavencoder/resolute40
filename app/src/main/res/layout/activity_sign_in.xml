@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/coordinatorLayout"
     android:fitsSystemWindows="false">
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#267187"
-        tools:context=".auth.login.SignInActivity">
+        tools:context=".auth.login.activity.SignInActivity">
 
         <LinearLayout
             android:id="@+id/linearLayout"

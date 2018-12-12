@@ -1,5 +1,7 @@
 package com.aloine.resolute40.auth.register.presenter;
 
+import android.widget.Toast;
+
 import com.aloine.resolute40.auth.register.contract.RegisterContract;
 import com.aloine.resolute40.auth.register.model.RegisterModel;
 
@@ -27,7 +29,7 @@ public class RegisterPresenter implements RegisterContract.Presenter {
 
     @Override
     public boolean verifyEntries() {
-        if (!model.getCommunity().isEmpty() && !model.getFull_name().isEmpty() && !model.getPhone_number().isEmpty() && !model.getPin().isEmpty()) {
+        if (!model.getCommunity().isEmpty() && !model.getFull_name().isEmpty() && model.getPhone_number().length() == 11 && model.getPin().length() == 4) {
 
             return true;
         }

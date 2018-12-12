@@ -129,6 +129,7 @@
                 android:background="@drawable/edit_text_reg_bg"
                 android:digits="1234567890"
                 android:imeOptions="actionDone"
+                android:maxLength="4"
                 android:inputType="numberPassword"
                 android:paddingLeft="10dp"
                 android:singleLine="true"

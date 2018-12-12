@@ -25,14 +25,16 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
-            android:name=".auth.login.SignInActivity"
+            android:name=".auth.login.activity.SignInActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".dashboard.DashboardActivity"
             android:theme="@style/AppTheme.NoActionBar">
+
         </activity>
 
         <!--

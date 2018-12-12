@@ -119,26 +119,5 @@ public class ViewMapActivity extends FragmentActivity implements OnMapReadyCallb
 
     }
 
-    private LatLng generate(LatLng...latLng) {
-        Double latitude = 0.00;
-        Double longitude = 0.00;
-        AppInstance app =  AppInstance.getInstance();
-        arrLatitude = app.getArrLatitude();
-        arrLongitude = app.getArrLongitude();
-        for(int i = 0; i < arrLatitude.size(); i++) {
-        if (arrLatitude.get(i) == arrLatitude.size()-1) {
-            return new LatLng(arrLatitude.size()-1, arrLongitude.size()-1);
-        } else{
 
-                latitude = arrLongitude.get(i);
-                longitude = arrLongitude.get(i);
-            generate(latLng);
-                return new LatLng(latitude,longitude);
-
-        }
-
-        }
-
-            return null;
-    }
 }
