@@ -24,8 +24,11 @@ import com.aloine.resolute40.auth.login.model.LoginModel;
 import com.aloine.resolute40.auth.login.network.ApiService;
 import com.aloine.resolute40.auth.login.network.LoginResponse;
 import com.aloine.resolute40.auth.login.presenter.LoginPresenter;
+import com.aloine.resolute40.auth.register.database.table.Farmer;
+import com.aloine.resolute40.auth.register.database.table.Farmer_Table;
 import com.aloine.resolute40.auth.register.network.Client;
 import com.aloine.resolute40.dashboard.DashboardActivity;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,6 +41,7 @@ public class SignInActivity extends AppCompatActivity implements LoginContract.V
     private ApiService mApiService;
     private LoginModel model;
     private CoordinatorLayout mCoordinatorLayout;
+    private Farmer farmer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +50,9 @@ public class SignInActivity extends AppCompatActivity implements LoginContract.V
 
         screenDisplay();
         statusColor();
+
         init();
+        farmer = SQLite.select().from(Farmer.class).where(Farmer_Table.id.eq(1)).querySingle();
 
     }
 
@@ -110,8 +116,8 @@ public class SignInActivity extends AppCompatActivity implements LoginContract.V
                 mPresenter.concatPin();
                 mLoginDialog.setCancelable(false);
                 mLoginDialog.show(getSupportFragmentManager(), "my_dialog");
-                model = new LoginModel("07035184047",mPresenter.concatPin());
-
+                String phone_number = farmer.getPhone_number();
+                model = new LoginModel(phone_number,mPresenter.concatPin());
                 performNetworkLogin(model);
 
 
@@ -132,14 +138,20 @@ public class SignInActivity extends AppCompatActivity implements LoginContract.V
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                if (response.body().getResponse().equals("success")) ;
-                {
-                    mLoginDialog.dismiss();
-                    startActivity(new Intent(SignInActivity.this, DashboardActivity.class));
+                switch (response.body().getResponse()) {
+                    case "success":
+                        mLoginDialog.dismiss();
+                        startActivity(new Intent(SignInActivity.this, DashboardActivity.class));
+                        Toast.makeText(SignInActivity.this, "You entered the right password", Toast.LENGTH_SHORT).show();
+                        break;
+                    case "failed":
+                        mLoginDialog.dismiss();
+                        Toast.makeText(SignInActivity.this, "You entered a wrong password", Toast.LENGTH_SHORT).show();
+                        break;
+                        default:
+
                 }
-                if (response.body().getResponse().equals("failed")) ;
-                mLoginDialog.dismiss();
-                wrongPin(model);
+
 
 
             }

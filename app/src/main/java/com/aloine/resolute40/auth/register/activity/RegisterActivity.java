@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.aloine.resolute40.R;
 import com.aloine.resolute40.auth.login.activity.SignInActivity;
 import com.aloine.resolute40.auth.register.contract.RegisterContract;
+import com.aloine.resolute40.auth.register.database.table.Farmer;
 import com.aloine.resolute40.auth.register.model.RegisterModel;
 import com.aloine.resolute40.auth.register.network.ApiService;
 import com.aloine.resolute40.auth.register.network.Client;
@@ -39,6 +40,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
     private ApiService mApiService;
     private DialogFragment dialogFragment;
     private RegisterModel model;
+    private Farmer farmer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,9 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
         register();
         mPresenter = new RegisterPresenter(this);
         signIn();
+        farmer = new Farmer();
+
+
 
     }
 
@@ -83,6 +88,9 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
                     dialogFragment.setCancelable(false);
                     dialogFragment.show(getSupportFragmentManager(), "my_dialog");
                      model = new RegisterModel(full_name,phone_number,community,pin);
+                     farmer.setId(1);
+                    farmer.setPhone_number(phone_number);
+                    farmer.save();
 
                     sendUserData(model);
 
