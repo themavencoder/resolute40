@@ -59,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
 
     }
 
-    private void statusColor() {
+    private void statusgit adColor() {
         Window window = this.getWindow();
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
     }
@@ -88,9 +88,6 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
                     dialogFragment.setCancelable(false);
                     dialogFragment.show(getSupportFragmentManager(), "my_dialog");
                      model = new RegisterModel(full_name,phone_number,community,pin);
-                     farmer.setId(1);
-                    farmer.setPhone_number(phone_number);
-                    farmer.save();
 
                     sendUserData(model);
 
@@ -161,6 +158,9 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
                 if (response.body().getResponse().equals("success")) {
                     dialogFragment.dismiss();
+                    farmer.setId(1);
+                    farmer.setPhone_number(mEtPhone.getText().toString());
+                    farmer.save();
 
                     Toast.makeText(RegisterActivity.this, "Registration status:" + response.body().getResponse(), Toast.LENGTH_SHORT).show();
                     mPresenter.loadNextScreen();
@@ -198,6 +198,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
                     @Override
                     public void onClick(View view) {
                         if (mPresenter.verifyEntries()) {
+                            dialogFragment.setCancelable(false);
                             dialogFragment.show(getSupportFragmentManager(), "my_dialog");
                             sendUserData(model);
 

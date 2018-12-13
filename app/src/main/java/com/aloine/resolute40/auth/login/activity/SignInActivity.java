@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aloine.resolute40.AppInstance;
 import com.aloine.resolute40.R;
 import com.aloine.resolute40.auth.login.contract.LoginContract;
 import com.aloine.resolute40.auth.login.dialog.LoginDialog;
@@ -42,6 +43,7 @@ public class SignInActivity extends AppCompatActivity implements LoginContract.V
     private LoginModel model;
     private CoordinatorLayout mCoordinatorLayout;
     private Farmer farmer;
+    private String phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,6 +119,8 @@ public class SignInActivity extends AppCompatActivity implements LoginContract.V
                 mLoginDialog.setCancelable(false);
                 mLoginDialog.show(getSupportFragmentManager(), "my_dialog");
                 String phone_number = farmer.getPhone_number();
+                Toast.makeText(SignInActivity.this, "Obtaining the phone_number live from db" + phone_number, Toast.LENGTH_SHORT).show();
+                phone = phone_number;
                 model = new LoginModel(phone_number,mPresenter.concatPin());
                 performNetworkLogin(model);
 
@@ -141,6 +145,14 @@ public class SignInActivity extends AppCompatActivity implements LoginContract.V
                 switch (response.body().getResponse()) {
                     case "success":
                         mLoginDialog.dismiss();
+                        AppInstance app = AppInstance.getInstance();
+                        app.setClient_token(response.body().getAuth_keys().getClient_token());
+                        app.setSession_token(response.body().getAuth_keys().getSession_token());
+                        app.setUsername(farmer.getPhone_number());
+
+                        Toast toast = Toast.makeText(SignInActivity.this,"The session token is " + app.getSession_token() + "and client token is " + app.getClient_token(),Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.CENTER,0,0);
+                        toast.show();
                         startActivity(new Intent(SignInActivity.this, DashboardActivity.class));
                         Toast.makeText(SignInActivity.this, "You entered the right password", Toast.LENGTH_SHORT).show();
                         break;

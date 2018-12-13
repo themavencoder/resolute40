@@ -9,7 +9,7 @@ import android.view.Window;
 
 import com.aloine.resolute40.R;
 import com.aloine.resolute40.dashboard.DashboardActivity;
-import com.aloine.resolute40.viewmap.ViewMapActivity;
+import com.aloine.resolute40.viewmap.activity.ViewMapActivity;
 
 public class ViewMappedFarmActivity extends AppCompatActivity {
 

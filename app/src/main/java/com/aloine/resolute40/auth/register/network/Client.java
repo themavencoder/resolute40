@@ -6,7 +6,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Client {
-    public static final String BASE_URL = "http://192.168.43.96:8000/auth/";
+    public static final String BASE_URL = "http://resolute40.pythonanywhere.com/";
 
     //Create Logger
     private static HttpLoggingInterceptor logger = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);

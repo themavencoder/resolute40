@@ -10,7 +10,7 @@ import retrofit2.http.POST;
 public interface ApiService {
 
 
-    @POST("mobile_signin")
+    @POST("auth/mobile_signin")
     Call<LoginResponse> startLogin(@Body LoginModel loginModel);
 
 }

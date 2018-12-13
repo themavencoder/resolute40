@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.aloine.resolute40.AppInstance;
 import com.aloine.resolute40.R;
+import com.aloine.resolute40.auth.register.database.table.Farmer;
 import com.aloine.resolute40.smartLocation.dialog.MyDialog;
 import com.github.ybq.android.spinkit.style.DoubleBounce;
 import com.google.android.gms.location.DetectedActivity;
@@ -52,6 +53,7 @@ public class MapsActivity extends AppCompatActivity {
     private Double d_long = 0.00;
     private AppInstance appInstance;
 
+    private ArrayList<ArrayList<Float>> pointsToServer = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,21 +118,32 @@ public class MapsActivity extends AppCompatActivity {
                         } else {
                             ArrayList<Double> d1 = new ArrayList<>();
                             ArrayList<LatLng> d2 = new ArrayList<>();
+                            ArrayList<Float> d1Float = new ArrayList<>();
+
                             d1.add(d_lat);
                             d1.add(d_long);
+                          d1Float.add(Float.valueOf(String.valueOf(d_lat)));
+                          d1Float.add(Float.valueOf(String.valueOf(d_long)));
                             d2.add(new LatLng(d_lat,d_long));
                             arrLatitude.add(d_lat);
                             arrLongitude.add(d_long);
                             pointsListLatlng.add(d2);
                             pointsLatlngAsList.add(new LatLng(d_lat,d_long));
                             pointsList.add(d1);
+                            pointsToServer.add(d1Float);
 
                             appInstance = AppInstance.getInstance();
                             appInstance.setPointsList(pointsList);
                             appInstance.setPointsListLatlng(pointsListLatlng);
                             appInstance.setPointsLatlngAsList(pointsLatlngAsList);
                             appInstance.setArrLatitude(arrLatitude);
+                            Farmer farmer = new Farmer();
+                            farmer.setId(1);
+                            farmer.setFirst_latitude(arrLatitude.get(0));
+                            farmer.setFirst_longitude(arrLongitude.get(0));
+                            farmer.save();
                             appInstance.setArrLongitude(arrLongitude);
+                            appInstance.setPointsToServer(pointsToServer);
                             realList.add(new LatLng(d_lat,d_long));
                             appInstance.setRealList(realList);
                             Toast.makeText(MapsActivity.this, "The length of the real list is " + pointsList.size(), Toast.LENGTH_SHORT).show();

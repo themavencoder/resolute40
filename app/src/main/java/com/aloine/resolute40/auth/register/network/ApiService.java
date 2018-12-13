@@ -10,7 +10,7 @@ import retrofit2.http.POST;
 public interface ApiService {
 
     @Headers("Content-Type: application/json")
-    @POST("mobile_register")
+    @POST("auth/mobile_register")
     Call<RegisterResponse> registerUser(@Body RegisterModel model);
 
 }
