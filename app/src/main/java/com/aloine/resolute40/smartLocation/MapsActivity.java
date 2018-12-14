@@ -1,9 +1,12 @@
 package com.aloine.resolute40.smartLocation;
 
 import android.animation.ObjectAnimator;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -52,6 +55,8 @@ public class MapsActivity extends AppCompatActivity {
     private Double d_lat = 0.00;
     private Double d_long = 0.00;
     private AppInstance appInstance;
+    private CoordinatorLayout mCoordinatorLayout;
+    public static int points = 0;
 
     private ArrayList<ArrayList<Float>> pointsToServer = new ArrayList<>();
 
@@ -96,6 +101,7 @@ public class MapsActivity extends AppCompatActivity {
     private void init() {
         latitude = findViewById(R.id.latitude);
         longitude = findViewById(R.id.longitude);
+        mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
     }
 
 
@@ -146,7 +152,12 @@ public class MapsActivity extends AppCompatActivity {
                             appInstance.setPointsToServer(pointsToServer);
                             realList.add(new LatLng(d_lat,d_long));
                             appInstance.setRealList(realList);
-                            Toast.makeText(MapsActivity.this, "The length of the real list is " + pointsList.size(), Toast.LENGTH_SHORT).show();
+                            points++;
+                            Snackbar snackbar =  showSavedAlert();
+                            snackbar.show();
+
+
+                            //Toast.makeText(MapsActivity.this, "The length of the real list is " + pointsList.size(), Toast.LENGTH_SHORT).show();
                             lat_temp = d_lat;
                             long_temp = d_long;
 
@@ -191,6 +202,19 @@ public class MapsActivity extends AppCompatActivity {
         super.onBackPressed();
         SmartLocation.with(this).location().stop();
         pointsList.clear();
+        points = 0;
+    }
+
+    private Snackbar showSavedAlert() {
+        Snackbar snackbar = Snackbar.make(mCoordinatorLayout, "Point " + points + " collected and saved for mapping", Snackbar.LENGTH_SHORT);
+
+        snackbar.setActionTextColor(Color.WHITE);
+
+        View sbView = snackbar.getView();
+        sbView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(getResources().getColor(R.color.white));
+        return snackbar;
     }
 }
 

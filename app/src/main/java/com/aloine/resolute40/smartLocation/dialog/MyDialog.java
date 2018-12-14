@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.aloine.resolute40.AppInstance;
 import com.aloine.resolute40.R;
 import com.aloine.resolute40.auth.register.network.Client;
+import com.aloine.resolute40.dashboard.DashboardActivity;
 import com.aloine.resolute40.smartLocation.StartMappingActivity;
 import com.aloine.resolute40.smartLocation.ViewMappedFarmActivity;
 import com.aloine.resolute40.smartLocation.model.Keys;
@@ -29,8 +30,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.aloine.resolute40.smartLocation.MapsActivity.points;
+
 public class MyDialog extends DialogFragment {
     private ApiService mApiService;
+    private  View v;
 
     @NonNull
     @Override
@@ -39,7 +43,7 @@ public class MyDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View v = inflater.inflate(R.layout.custom_dialog_layout,null);
+         v = inflater.inflate(R.layout.custom_dialog_layout,null);
         builder.setView(v);
 
 
@@ -60,8 +64,8 @@ public class MyDialog extends DialogFragment {
 
                 Toast.makeText(getActivity(), "Your settings has been saved", Toast.LENGTH_SHORT).show();
                 SmartLocation.with(view.getContext()).location().stop();
-                view.getContext().startActivity(new Intent(view.getContext().getApplicationContext(), ViewMappedFarmActivity.class));
-            }
+
+                            }
         });
 
         continue_mapping.setOnClickListener(new View.OnClickListener() {
@@ -93,12 +97,21 @@ public class MyDialog extends DialogFragment {
                 if (response.body().getResponse() != null) {
                     switch (response.body().getResponse()) {
                         case "success":
+                            points = 0;
                             Toast.makeText(getActivity(), "Posted to the server successfully", Toast.LENGTH_LONG).show();
+                            v.getContext().startActivity(new Intent(v.getContext(), ViewMappedFarmActivity.class));
+
                             break;
                         case "failed":
+                            points = 0;
                             Toast.makeText(getActivity(), "Failure to post to the server successfully", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(v.getContext(),DashboardActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+
                             break;
                         default:
+                            points = 0;
                             Toast.makeText(getActivity(), "The default method is shown when the switch breaks", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -106,7 +119,11 @@ public class MyDialog extends DialogFragment {
 
             @Override
             public void onFailure(Call<PostLocationResponse> call, Throwable t) {
+                points = 0;
                 Toast.makeText(getActivity(), "Failure to connect to the server", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(v.getContext(),DashboardActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
 
             }
         });

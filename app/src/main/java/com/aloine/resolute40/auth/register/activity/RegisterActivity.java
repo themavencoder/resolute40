@@ -1,6 +1,8 @@
 package com.aloine.resolute40.auth.register.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aloine.resolute40.AppInstance;
 import com.aloine.resolute40.R;
 import com.aloine.resolute40.auth.login.activity.SignInActivity;
 import com.aloine.resolute40.auth.register.contract.RegisterContract;
@@ -41,6 +44,10 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
     private DialogFragment dialogFragment;
     private RegisterModel model;
     private Farmer farmer;
+    public SharedPreferences sharedPreferences;
+    public static final String mypreference = "mypref";
+    public static final String userName = "userNameKey";
+    public AppInstance app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +61,19 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
         mPresenter = new RegisterPresenter(this);
         signIn();
         farmer = new Farmer();
+        app = AppInstance.getInstance();
+        sharedPreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
+
+        if (sharedPreferences.contains(userName)) {
+            app.setUsername(sharedPreferences.getString(userName,""));
+
+        }
 
 
 
     }
 
-    private void statusgit adColor() {
+    private void statusColor() {
         Window window = this.getWindow();
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
     }
@@ -158,6 +172,9 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
                 if (response.body().getResponse().equals("success")) {
                     dialogFragment.dismiss();
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(userName,mEtPhone.getText().toString());
+                    editor.commit();
                     farmer.setId(1);
                     farmer.setPhone_number(mEtPhone.getText().toString());
                     farmer.save();

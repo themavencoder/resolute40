@@ -1,7 +1,10 @@
 package com.aloine.resolute40.dashboard;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -9,15 +12,32 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.widget.GridLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aloine.resolute40.AppInstance;
 import com.aloine.resolute40.R;
+import com.aloine.resolute40.auth.register.network.Client;
 import com.aloine.resolute40.map.MapsActivity;
+import com.aloine.resolute40.panicalert.PanicActivity;
+import com.aloine.resolute40.panicalert.dialog.PanicDialog;
+import com.aloine.resolute40.panicalert.model.Keys;
+import com.aloine.resolute40.panicalert.model.PanicData;
+import com.aloine.resolute40.panicalert.model.PanicDetails;
+import com.aloine.resolute40.panicalert.model.PanicResponse;
+import com.aloine.resolute40.panicalert.network.ApiService;
 import com.aloine.resolute40.smartLocation.StartMappingActivity;
+import com.aloine.resolute40.viewmap.activity.ViewMapActivity;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class DashboardActivity extends AppCompatActivity {
     private GridLayout gridLayout;
+    private PanicDialog panicDialog;
+    private CoordinatorLayout mCoordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +63,10 @@ public class DashboardActivity extends AppCompatActivity {
     private void init() {
         gridLayout = findViewById(R.id.mainGrid);
         setSingleEvent(gridLayout);
+        panicDialog = new PanicDialog();
+        mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
     }
+
 
     private void setSingleEvent(GridLayout gridLayout) {
         for (int i = 0; i < gridLayout.getChildCount(); i++) {
@@ -58,10 +81,16 @@ public class DashboardActivity extends AppCompatActivity {
                             startActivity(new Intent(DashboardActivity.this, StartMappingActivity.class));
                             break;
                         case 1:
-                            Toast.makeText(DashboardActivity.this, "Activate panic button", Toast.LENGTH_SHORT).show();
+                            panicDialog.setCancelable(false);
+                            panicDialog.show(getSupportFragmentManager(), "my_dialog");
+                            AppInstance app = AppInstance.getInstance();
+                            Keys keys = new Keys(app.getClient_token(),app.getSession_token());
+                            PanicDetails panicDetails  = new PanicDetails(app.getUsername(),"A panic has been sent","True",0.0f,0.0f);
+                            PanicData panicData = new PanicData(keys,panicDetails,"Farmer");
+                            panicNetworkRequest(panicData);
                             break;
                         case 2:
-                            Toast.makeText(DashboardActivity.this, "View your map farm", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(DashboardActivity.this, ViewMapActivity.class));
                             break;
                         case 3:
                             Toast.makeText(DashboardActivity.this, "Vet Aid", Toast.LENGTH_SHORT).show();
@@ -85,4 +114,81 @@ public class DashboardActivity extends AppCompatActivity {
         decorView.setSystemUiVisibility(uiOptions);
 
     }
+    @Override
+    public void onBackPressed() {
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(a);
+
+    }
+
+    private void panicNetworkRequest(PanicData data) {
+         ApiService apiService;
+        apiService = Client.getClient().create(ApiService.class);
+        Call<PanicResponse> call = apiService.postLocation(data);
+        call.enqueue(new Callback<PanicResponse>() {
+            @Override
+            public void onResponse(Call<PanicResponse> call, Response<PanicResponse> response) {
+                if (response.body().getResponse() != null) {
+                    switch (response.body().getResponse()) {
+                        case "success":
+                            panicDialog.dismiss();
+                            Snackbar snackbar = success("Your panic was sent to the server");
+                            snackbar.show();
+
+
+                            break;
+                        case "failed":
+                            panicDialog.dismiss();
+                            Snackbar snack = error("Your panic was not sent");
+                            snack.show();
+
+                            break;
+                        default:
+                            panicDialog.dismiss();
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PanicResponse> call, Throwable t) {
+                panicDialog.dismiss();
+                Snackbar snackbar = error("Your network connection is a bit slow");
+                snackbar.show();
+
+            }
+        });
+
+
+
+    }
+    private Snackbar error(String s) {
+        Snackbar snackbar = Snackbar.make(mCoordinatorLayout, s, Snackbar.LENGTH_LONG)
+                .setAction("RETRY", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                    }
+                });
+        snackbar.setActionTextColor(Color.WHITE);
+
+        View sbView = snackbar.getView();
+        sbView.setBackgroundColor(Color.RED);
+        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(getResources().getColor(R.color.white));
+        return snackbar;
+    }
+
+    private Snackbar success(String s) {
+        Snackbar snackbar = Snackbar.make(mCoordinatorLayout, s, Snackbar.LENGTH_LONG);
+        snackbar.setActionTextColor(Color.WHITE);
+
+        View sbView = snackbar.getView();
+        sbView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(getResources().getColor(R.color.white));
+        return snackbar;
+    }
+
 }

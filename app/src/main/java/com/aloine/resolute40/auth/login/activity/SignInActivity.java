@@ -1,6 +1,8 @@
 package com.aloine.resolute40.auth.login.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -35,6 +37,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.aloine.resolute40.auth.register.activity.RegisterActivity.mypreference;
+import static com.aloine.resolute40.auth.register.activity.RegisterActivity.userName;
+
 public class SignInActivity extends AppCompatActivity implements LoginContract.View {
     private EditText mEtOne, mEtTwo, mEtThree, mEtFour;
     private LoginContract.Presenter mPresenter;
@@ -44,6 +49,7 @@ public class SignInActivity extends AppCompatActivity implements LoginContract.V
     private CoordinatorLayout mCoordinatorLayout;
     private Farmer farmer;
     private String phone;
+    private AppInstance app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +61,12 @@ public class SignInActivity extends AppCompatActivity implements LoginContract.V
 
         init();
         farmer = SQLite.select().from(Farmer.class).where(Farmer_Table.id.eq(1)).querySingle();
+       SharedPreferences sharedPreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
+
+        if (sharedPreferences.contains(userName)) {
+            app.setUsername(sharedPreferences.getString(userName,""));
+
+        }
 
     }
 
@@ -80,6 +92,7 @@ public class SignInActivity extends AppCompatActivity implements LoginContract.V
         mEtFour.addTextChangedListener(watcher);
         mPresenter = new LoginPresenter(this);
         mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
+        app = AppInstance.getInstance();
 
     }
 
@@ -118,10 +131,8 @@ public class SignInActivity extends AppCompatActivity implements LoginContract.V
                 mPresenter.concatPin();
                 mLoginDialog.setCancelable(false);
                 mLoginDialog.show(getSupportFragmentManager(), "my_dialog");
-                String phone_number = farmer.getPhone_number();
-                Toast.makeText(SignInActivity.this, "Obtaining the phone_number live from db" + phone_number, Toast.LENGTH_SHORT).show();
-                phone = phone_number;
-                model = new LoginModel(phone_number,mPresenter.concatPin());
+             //   Toast.makeText(SignInActivity.this, "shared pref" + app.getUsername(), Toast.LENGTH_SHORT).show();
+                model = new LoginModel(app.getUsername(),mPresenter.concatPin());
                 performNetworkLogin(model);
 
 
@@ -148,17 +159,16 @@ public class SignInActivity extends AppCompatActivity implements LoginContract.V
                         AppInstance app = AppInstance.getInstance();
                         app.setClient_token(response.body().getAuth_keys().getClient_token());
                         app.setSession_token(response.body().getAuth_keys().getSession_token());
-                        app.setUsername(farmer.getPhone_number());
 
-                        Toast toast = Toast.makeText(SignInActivity.this,"The session token is " + app.getSession_token() + "and client token is " + app.getClient_token(),Toast.LENGTH_LONG);
-                        toast.setGravity(Gravity.CENTER,0,0);
-                        toast.show();
+                       // Toast toast = Toast.makeText(SignInActivity.this,"The session token is " + app.getSession_token() + "and client token is " + app.getClient_token(),Toast.LENGTH_LONG);
+                       // toast.setGravity(Gravity.CENTER,0,0);
+                      //  toast.show();
                         startActivity(new Intent(SignInActivity.this, DashboardActivity.class));
-                        Toast.makeText(SignInActivity.this, "You entered the right password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignInActivity.this, "Successful login", Toast.LENGTH_SHORT).show();
                         break;
                     case "failed":
                         mLoginDialog.dismiss();
-                        Toast.makeText(SignInActivity.this, "You entered a wrong password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignInActivity.this, "Wrong password. Please try again!", Toast.LENGTH_SHORT).show();
                         break;
                         default:
 
@@ -173,7 +183,7 @@ public class SignInActivity extends AppCompatActivity implements LoginContract.V
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 mLoginDialog.dismiss();
                 internetError(model);
-                Toast toast = Toast.makeText(SignInActivity.this,"There is internet problem",Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(SignInActivity.this,"Internet connection error. Try again!",Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER,0,0);
                 toast.show();
 

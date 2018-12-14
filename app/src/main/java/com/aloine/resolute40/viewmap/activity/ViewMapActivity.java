@@ -1,5 +1,6 @@
 package com.aloine.resolute40.viewmap.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
@@ -9,6 +10,7 @@ import com.aloine.resolute40.R;
 import com.aloine.resolute40.auth.register.database.table.Farmer;
 import com.aloine.resolute40.auth.register.database.table.Farmer_Table;
 import com.aloine.resolute40.auth.register.network.Client;
+import com.aloine.resolute40.dashboard.DashboardActivity;
 import com.aloine.resolute40.viewmap.dialog.MyDialog;
 import com.aloine.resolute40.viewmap.model.Data;
 import com.aloine.resolute40.viewmap.network.ApiService;
@@ -31,7 +33,7 @@ import retrofit2.Response;
 
 public class ViewMapActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnPolylineClickListener, GoogleMap.OnPolygonClickListener {
 
-    private GoogleMap mMap;
+    private GoogleMap googleMap;
     private ArrayList<LatLng> pointsList = new ArrayList<>();
     private ArrayList<Double> arrLatitude = new ArrayList<>();
     private ArrayList<Double> arrLongitude = new ArrayList<>();
@@ -47,14 +49,21 @@ public class ViewMapActivity extends FragmentActivity implements OnMapReadyCallb
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_map);
-//        String username = farmer.getPhone_number();
+        myDialog = new MyDialog();
+        myDialog.setCancelable(false);
+        myDialog.show(getSupportFragmentManager(), "my_dialog");
+        farmer = SQLite.select().from(Farmer.class).where(Farmer_Table.id.eq(1)).querySingle();
+
+      //  String username = farmer.getPhone_number();
         //Toast.makeText(this, "Is the phone number" +username, Toast.LENGTH_SHORT).show();
 AppInstance appInstance = AppInstance.getInstance();
         getMap(appInstance.getUsername());
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+
+            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.map);
+            mapFragment.getMapAsync(this);
 
 
     }
@@ -71,10 +80,7 @@ AppInstance appInstance = AppInstance.getInstance();
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        myDialog = new MyDialog();
-        myDialog.setCancelable(false);
-        myDialog.show(getSupportFragmentManager(), "my_dialog");
-        farmer = SQLite.select().from(Farmer.class).where(Farmer_Table.id.eq(1)).querySingle();
+        this.googleMap = googleMap;
 
         AppInstance app = AppInstance.getInstance();
         arrLatitude = app.getArrLatitude();
@@ -82,11 +88,15 @@ AppInstance appInstance = AppInstance.getInstance();
         realList = app.getRealList();
 
 
+        drawMap(googleMap);
+    }
+
+    private void drawMap(GoogleMap googleMap) {
         PolylineOptions polygonOptions = new PolylineOptions();
         if (Data.getServerPointsInLatLng() != null)  {
             polygonOptions.addAll(Data.getServerPointsInLatLng());
         }
-        polygonOptions.width(6);
+        polygonOptions.width(10);
         polygonOptions.color(R.color.colorPrimaryDark);
         googleMap.addPolyline(polygonOptions);
         // Position the map's camera near Alice Springs in the center of Australia,
@@ -111,6 +121,7 @@ AppInstance appInstance = AppInstance.getInstance();
     }
 
     private void getMap(String username) {
+
         mApiService = Client.getClient().create(ApiService.class);
         Call<ViewMapResponse> call = mApiService.getLocation(username);
         call.enqueue(new Callback<ViewMapResponse>() {
@@ -123,6 +134,8 @@ AppInstance appInstance = AppInstance.getInstance();
                         serverPointsInFloat = response.body().getData();
                         if (serverPointsInFloat != null) {
                             Data.setServerPointsInLatLng(convertToLatLng(serverPointsInFloat));
+                           drawMap(googleMap);
+
                         }
                     } else if (response.body().getResponse().equals("failed")) {
                         myDialog.dismiss();
@@ -150,6 +163,14 @@ AppInstance appInstance = AppInstance.getInstance();
     return latLng;
 
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this,DashboardActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
 
 
 }
