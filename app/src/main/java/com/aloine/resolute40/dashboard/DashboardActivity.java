@@ -77,7 +77,6 @@ public class DashboardActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     switch (finalI) {
                         case 0:
-                            Toast.makeText(DashboardActivity.this, "Map your farm is clicked", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(DashboardActivity.this, StartMappingActivity.class));
                             break;
                         case 1:
@@ -93,7 +92,7 @@ public class DashboardActivity extends AppCompatActivity {
                             startActivity(new Intent(DashboardActivity.this, ViewMapActivity.class));
                             break;
                         case 3:
-                            Toast.makeText(DashboardActivity.this, "Vet Aid", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(DashboardActivity.this, "Still in production", Toast.LENGTH_SHORT).show();
                             break;
                         default:
                     }
