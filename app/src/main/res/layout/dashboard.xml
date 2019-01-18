@@ -149,7 +149,7 @@ android:layout_height="match_parent">
 
                     <TextView
                         android:textAlignment="center"
-                        android:text="Activate Panic Button "
+                        android:text="Activate Panic "
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -234,7 +234,7 @@ android:layout_height="match_parent">
 
                     <TextView
                         android:textAlignment="center"
-                        android:text="Vet Aid"
+                        android:text="Marketplace"
                         android:textColor="@color/white"
                         android:layout_marginTop="8dp"
                         android:layout_gravity="center"

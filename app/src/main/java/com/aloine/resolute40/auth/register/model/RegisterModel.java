@@ -17,19 +17,30 @@ public class RegisterModel {
     @SerializedName("pin")
     private String pin;
 
+    @SerializedName("user_type")
+    private String user_type;
+
     public RegisterModel() {
 
 
     }
 
-    public RegisterModel(String full_name, String phone_number, String community, String pin) {
+    public RegisterModel(String full_name, String phone_number, String community, String pin, String user_type) {
 
         this.full_name = full_name;
         this.phone = phone_number;
         this.community = community;
         this.pin = pin;
+        this.user_type = user_type;
     }
 
+    public String getUser_type() {
+        return user_type;
+    }
+
+    public void setUser_type(String user_type) {
+        this.user_type = user_type;
+    }
 
     public String getFull_name() {
         return full_name;

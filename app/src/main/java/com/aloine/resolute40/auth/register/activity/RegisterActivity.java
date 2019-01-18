@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
@@ -13,14 +15,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aloine.resolute40.AppInstance;
 import com.aloine.resolute40.R;
-import com.aloine.resolute40.auth.login.activity.SignInActivity;
+import com.aloine.resolute40.auth.formalLogin.activity.FormalSignInActivity;
+import com.aloine.resolute40.auth.quickLogin.activity.SignInActivity;
 import com.aloine.resolute40.auth.register.contract.RegisterContract;
 import com.aloine.resolute40.auth.register.database.table.Farmer;
 import com.aloine.resolute40.auth.register.model.RegisterModel;
@@ -36,6 +41,7 @@ import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity implements RegisterContract.View {
     private EditText mEtName, mEtPhone, mEtCommunity, mEtPin;
+    private Spinner mSpStatus;
     private TextView mTvSignIn;
     private Button mButtonReg;
     private RegisterContract.Presenter mPresenter;
@@ -54,7 +60,10 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         flags();
-        statusColor();
+        if (Build.VERSION.SDK_INT >= 21) {
+            statusColor();
+        }
+
 
         init();
         register();
@@ -75,7 +84,10 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
 
     private void statusColor() {
         Window window = this.getWindow();
-        window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
+        if (Build.VERSION.SDK_INT >= 21) {
+            window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
+
+        }
     }
 
     private void signIn() {
@@ -98,10 +110,11 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
                 String phone_number = mEtPhone.getText().toString();
                 String pin = mEtPin.getText().toString();
                 mPresenter.insertData(full_name, phone_number,community, pin);
-                if (mPresenter.verifyEntries()) {
+
+                if (mPresenter.verifyEntries() && !mSpStatus.getSelectedItem().toString().equals("Select type")) {
                     dialogFragment.setCancelable(false);
                     dialogFragment.show(getSupportFragmentManager(), "my_dialog");
-                     model = new RegisterModel(full_name,phone_number,community,pin);
+                     model = new RegisterModel(full_name,phone_number,community,pin,mSpStatus.getSelectedItem().toString());
 
                     sendUserData(model);
 
@@ -142,6 +155,8 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
     }
 
     private void init() {
+        mSpStatus = findViewById(R.id.spin_status);
+        mSpStatus.getBackground().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
         mEtName = findViewById(R.id.edit_full_name);
         mEtPhone = findViewById(R.id.edit_phone_number);
         mEtCommunity = findViewById(R.id.edit_community);
@@ -150,18 +165,21 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
         mButtonReg = findViewById(R.id.button_register);
         mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
         dialogFragment = new DialogFragment();
+        ArrayAdapter<CharSequence> statusAdapter = ArrayAdapter.createFromResource(this, R.array.Status, R.layout.spinner_item);
+        statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpStatus.setAdapter(statusAdapter);
     }
 
 
     @Override
     public void navigateToNextScreen() {
-        startActivity(new Intent(RegisterActivity.this, SignInActivity.class));
+        startActivity(new Intent(RegisterActivity.this, FormalSignInActivity.class));
 
     }
 
     @Override
     public void navigateToSignInScreen() {
-        startActivity(new Intent(RegisterActivity.this, SignInActivity.class));
+        startActivity(new Intent(RegisterActivity.this, FormalSignInActivity.class));
     }
 
     private void sendUserData(RegisterModel registerModel) {

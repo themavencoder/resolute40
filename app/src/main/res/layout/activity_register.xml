@@ -8,177 +8,198 @@
     android:layout_height="match_parent"
     tools:context=".auth.register.activity.RegisterActivity">
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/ash"
-    tools:context=".auth.register.activity.RegisterActivity">
-
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="24dp"
+        android:background="@color/ash"
+        tools:context=".auth.register.activity.RegisterActivity">
 
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:src="@drawable/resolute" />
-
-        <TextView
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:text="Resolving conflict using technology"
-            android:textColor="#4fb752"
-            android:textSize="14sp" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/fullName"
-            android:textColor="#267187"
-            android:textSize="12sp" />
 
-        <EditText
-            android:id="@+id/edit_full_name"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/edit_text_reg_bg"
-            android:imeOptions="actionNext"
-            android:inputType="textPersonName"
-            android:paddingLeft="10dp"
-            android:singleLine="true"
-            android:textColor="@android:color/black" />
+            android:layout_height="match_parent"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/community"
-            android:textColor="#267187"
-            android:textSize="12sp" />
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:src="@drawable/resolute" />
 
-        <EditText
-            android:id="@+id/edit_community"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/edit_text_reg_bg"
-            android:imeOptions="actionNext"
-            android:inputType="textPersonName"
-            android:paddingLeft="10dp"
-            android:singleLine="true"
-            android:textColor="@android:color/black" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Phone number"
-            android:textColor="#267187"
-            android:textSize="12sp" />
-
-        <EditText
-            android:id="@+id/edit_phone_number"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/edit_text_reg_bg"
-            android:digits="1234567890"
-            android:imeOptions="actionNext"
-            android:inputType="number"
-            android:paddingLeft="10dp"
-            android:singleLine="true"
-            android:textColor="@android:color/black" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Pin (a 4-digit number for security)"
-            android:textColor="#267187"
-            android:textSize="12sp" />
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            app:passwordToggleEnabled="true"
-            app:passwordToggleTint="#FFF">
-
-            <EditText
-                android:id="@+id/edit_pin"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="Resolving conflict using technology"
+                android:textColor="#4fb752"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/fullName"
+                android:textColor="#267187"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/edit_full_name"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/edit_text_reg_bg"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:paddingLeft="10dp"
+                android:singleLine="true"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/community"
+                android:textColor="#267187"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/edit_community"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/edit_text_reg_bg"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:paddingLeft="10dp"
+                android:singleLine="true"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Phone number"
+                android:textColor="#267187"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/edit_phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/edit_text_reg_bg"
                 android:digits="1234567890"
-                android:imeOptions="actionDone"
-                android:maxLength="4"
-                android:inputType="numberPassword"
+                android:imeOptions="actionNext"
+                android:inputType="number"
                 android:paddingLeft="10dp"
                 android:singleLine="true"
                 android:textColor="@android:color/black" />
 
 
-        </android.support.design.widget.TextInputLayout>
-
-
-        <Button
-            android:id="@+id/button_register"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/btn_green"
-            android:text="REGISTER"
-
-            android:textColor="#FFFF"
-            android:textSize="16sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Already have an account?"
+                android:layout_marginTop="16dp"
+                android:text="Pin (a 4-digit number for security)"
                 android:textColor="#267187"
                 android:textSize="12sp" />
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="#FFF">
+
+                <EditText
+                    android:id="@+id/edit_pin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_reg_bg"
+                    android:digits="1234567890"
+                    android:imeOptions="actionDone"
+                    android:inputType="numberPassword"
+                    android:maxLength="4"
+                    android:paddingLeft="10dp"
+                    android:singleLine="true"
+                    android:textColor="@android:color/black" />
+
+
+            </android.support.design.widget.TextInputLayout>
+
             <TextView
-                android:id="@+id/text_sign_in"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="4dp"
-
-                android:text="SIGN IN"
-                android:textColor="#02B0EF"
+                android:layout_marginTop="16dp"
+                android:text="User type"
+                android:textColor="#267187"
                 android:textSize="12sp" />
+            <Spinner
+                android:id="@+id/spin_status"
+                style="@style/SpinnerTheme"
+                android:layout_width="match_parent"
+                android:background="@drawable/edit_text_reg_bg"
+                android:layout_marginTop="8dp"
+                android:layout_height="45dp"
+           />
+
+            <Button
+                android:id="@+id/button_register"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/btn_green"
+                android:text="REGISTER"
+
+                android:textColor="#FFFF"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Already have an account?"
+                    android:textColor="#267187"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/text_sign_in"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="4dp"
+
+                    android:text="SIGN IN"
+                    android:textColor="#02B0EF"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
+        </ScrollView>
 
 
-    </LinearLayout>
-
-
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
 </android.support.design.widget.CoordinatorLayout>

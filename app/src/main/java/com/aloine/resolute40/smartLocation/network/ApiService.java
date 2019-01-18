@@ -1,7 +1,5 @@
 package com.aloine.resolute40.smartLocation.network;
 
-import com.aloine.resolute40.auth.login.model.LoginModel;
-import com.aloine.resolute40.auth.login.network.LoginResponse;
 import com.aloine.resolute40.smartLocation.model.PostLocationData;
 
 

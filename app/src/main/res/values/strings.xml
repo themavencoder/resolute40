@@ -5,4 +5,11 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_maps_AIzaSyARHqGvIzYY0UPhmzU0Q8Z1uUTSC125eLw">Map</string>
     <string name="title_activity_view_map">Map</string>
+
+    <string-array name="Status">
+        <item>Select type</item>
+        <item>Farmer</item>
+        <item>Herdsman</item>
+
+    </string-array>
 </resources>

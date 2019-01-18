@@ -2,6 +2,7 @@ package com.aloine.resolute40.dashboard;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -9,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.GridLayout;
@@ -18,8 +20,6 @@ import android.widget.Toast;
 import com.aloine.resolute40.AppInstance;
 import com.aloine.resolute40.R;
 import com.aloine.resolute40.auth.register.network.Client;
-import com.aloine.resolute40.map.MapsActivity;
-import com.aloine.resolute40.panicalert.PanicActivity;
 import com.aloine.resolute40.panicalert.dialog.PanicDialog;
 import com.aloine.resolute40.panicalert.model.Keys;
 import com.aloine.resolute40.panicalert.model.PanicData;
@@ -38,18 +38,31 @@ public class DashboardActivity extends AppCompatActivity {
     private GridLayout gridLayout;
     private PanicDialog panicDialog;
     private CoordinatorLayout mCoordinatorLayout;
+    private Boolean b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dashboard);
+        AppInstance app = AppInstance.getInstance();
+        if (app.getUsertype().toLowerCase().equals("herdsman")) {
+            setContentView(R.layout.herdsmen_dashboard);
+            b = false;
+        } else {
+            setContentView(R.layout.dashboard);
+            b = true;
+        }
+
+
         hideNavigationBar();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         init();
         Window window = this.getWindow();
-        window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
+        if (Build.VERSION.SDK_INT >= 21) {
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+        }
+
 
        /* if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("");
@@ -72,30 +85,53 @@ public class DashboardActivity extends AppCompatActivity {
         for (int i = 0; i < gridLayout.getChildCount(); i++) {
             CardView cardView = (CardView) gridLayout.getChildAt(i);
             final int finalI = i;
+            Log.i("Information", "value of " + finalI);
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    switch (finalI) {
-                        case 0:
-                            startActivity(new Intent(DashboardActivity.this, StartMappingActivity.class));
-                            break;
-                        case 1:
-                            panicDialog.setCancelable(false);
-                            panicDialog.show(getSupportFragmentManager(), "my_dialog");
-                            AppInstance app = AppInstance.getInstance();
-                            Keys keys = new Keys(app.getClient_token(),app.getSession_token());
-                            PanicDetails panicDetails  = new PanicDetails(app.getUsername(),"A panic has been sent","True",0.0f,0.0f);
-                            PanicData panicData = new PanicData(keys,panicDetails,"Farmer");
-                            panicNetworkRequest(panicData);
-                            break;
-                        case 2:
-                            startActivity(new Intent(DashboardActivity.this, ViewMapActivity.class));
-                            break;
-                        case 3:
-                            Toast.makeText(DashboardActivity.this, "Still in production", Toast.LENGTH_SHORT).show();
-                            break;
-                        default:
+                    if (b) {
+                        switch (finalI) {
+                            case 0:
+                                startActivity(new Intent(DashboardActivity.this, StartMappingActivity.class));
+                                break;
+                            case 1:
+                                panicDialog.setCancelable(false);
+                                panicDialog.show(getSupportFragmentManager(), "my_dialog");
+                                AppInstance app = AppInstance.getInstance();
+                                Keys keys = new Keys(app.getClient_token(), app.getSession_token());
+                                PanicDetails panicDetails = new PanicDetails(app.getUsername(), "A panic has been sent", "True", 0.0f, 0.0f);
+                                PanicData panicData = new PanicData(keys, panicDetails, app.getUsertype());
+                                panicNetworkRequest(panicData);
+                                break;
+                            case 2:
+                                startActivity(new Intent(DashboardActivity.this, ViewMapActivity.class));
+                                break;
+                            case 3:
+                                Toast.makeText(DashboardActivity.this, "Still in production", Toast.LENGTH_SHORT).show();
+                                break;
+                            default:
+                        }
+
+                    } else {
+
+                        switch (finalI) {
+                            case 0:
+                                panicDialog.setCancelable(false);
+                                panicDialog.show(getSupportFragmentManager(), "my_dialog");
+                                AppInstance app = AppInstance.getInstance();
+                                Keys keys = new Keys(app.getClient_token(), app.getSession_token());
+                                PanicDetails panicDetails = new PanicDetails(app.getUsername(), "A panic has been sent", "True", 0.0f, 0.0f);
+                                PanicData panicData = new PanicData(keys, panicDetails, app.getUsertype());
+                                panicNetworkRequest(panicData);
+                                break;
+                            case 1:
+                                Toast.makeText(DashboardActivity.this, "Still in production", Toast.LENGTH_SHORT).show();
+                                break;
+                            default:
+
+                        }
                     }
+
 
                 }
             });
@@ -113,6 +149,7 @@ public class DashboardActivity extends AppCompatActivity {
         decorView.setSystemUiVisibility(uiOptions);
 
     }
+
     @Override
     public void onBackPressed() {
         Intent a = new Intent(Intent.ACTION_MAIN);
@@ -123,7 +160,7 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     private void panicNetworkRequest(PanicData data) {
-         ApiService apiService;
+        ApiService apiService;
         apiService = Client.getClient().create(ApiService.class);
         Call<PanicResponse> call = apiService.postLocation(data);
         call.enqueue(new Callback<PanicResponse>() {
@@ -134,6 +171,7 @@ public class DashboardActivity extends AppCompatActivity {
                         case "success":
                             panicDialog.dismiss();
                             Snackbar snackbar = success("Your panic was sent to the server");
+
                             snackbar.show();
 
 
@@ -161,8 +199,8 @@ public class DashboardActivity extends AppCompatActivity {
         });
 
 
-
     }
+
     private Snackbar error(String s) {
         Snackbar snackbar = Snackbar.make(mCoordinatorLayout, s, Snackbar.LENGTH_LONG)
                 .setAction("RETRY", new View.OnClickListener() {

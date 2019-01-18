@@ -18,6 +18,7 @@ public class AppInstance {
     private String client_token;
     private String session_token;
     private String username;
+    private String usertype;
 
     private ArrayList<ArrayList<Float>> pointsToServer = new ArrayList<>();
 
@@ -27,6 +28,14 @@ public class AppInstance {
         }
 return sInstance;
 
+    }
+
+    public String getUsertype() {
+        return usertype;
+    }
+
+    public void setUsertype(String usertype) {
+        this.usertype = usertype;
     }
 
     public String getUsername() {

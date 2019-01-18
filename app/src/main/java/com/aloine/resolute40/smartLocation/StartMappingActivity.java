@@ -24,8 +24,6 @@ import android.widget.TextView;
 
 import com.aloine.resolute40.R;
 
-import io.nlopez.smartlocation.SmartLocation;
-
 public class StartMappingActivity extends AppCompatActivity {
     private CoordinatorLayout mCoordinatorLayout;
 
@@ -36,7 +34,10 @@ public class StartMappingActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Window window = this.getWindow();
-        window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+        if (Build.VERSION.SDK_INT >= 21) {
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+
+        }
         mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
 
 
@@ -55,7 +56,7 @@ public class StartMappingActivity extends AppCompatActivity {
             buildAlertMessageNoGps();
             return;
         }
-        if ( Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             Snackbar snackbar = errorLocation("Location permission disabled");
             snackbar.show();
             return;
@@ -65,15 +66,15 @@ public class StartMappingActivity extends AppCompatActivity {
         NetworkInfo.State mobile = conMan.getNetworkInfo(0).getState();
         NetworkInfo.State wifi = conMan.getNetworkInfo(1).getState();
 
-        if (! (mobile == NetworkInfo.State.CONNECTED || mobile == NetworkInfo.State.CONNECTING || wifi == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTING)  ) {
+        if (!(mobile == NetworkInfo.State.CONNECTED || mobile == NetworkInfo.State.CONNECTING || wifi == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTING)) {
             Snackbar snackbar = errorNetwork("Your network is currently unavailable");
             snackbar.show();
             return;
         }
 
 
-        if (ContextCompat.checkSelfPermission( getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) == PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission( getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             startActivity(new Intent(StartMappingActivity.this, MapsActivity.class));
         }
 
@@ -96,6 +97,7 @@ public class StartMappingActivity extends AppCompatActivity {
         textView.setTextColor(getResources().getColor(R.color.white));
         return snackbar;
     }
+
     private Snackbar errorNetwork(String s) {
         Snackbar snackbar = Snackbar.make(mCoordinatorLayout, s, Snackbar.LENGTH_LONG)
                 .setAction("ENABLE", new View.OnClickListener() {
@@ -112,9 +114,10 @@ public class StartMappingActivity extends AppCompatActivity {
         textView.setTextColor(getResources().getColor(R.color.white));
         return snackbar;
     }
+
     private void buildAlertMessageNoGps() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
+        builder.setMessage("Your GPS is disabled. Do you want to enable it?")
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, final int id) {
@@ -133,7 +136,7 @@ public class StartMappingActivity extends AppCompatActivity {
     protected void createNetErrorDialog() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("You need internet connection for this app. Please turn on mobile network or Wi-Fi in Settings.")
+        builder.setMessage("This app requires internet connection. Please turn on mobile data or wifi.")
                 .setTitle("Unable to connect")
                 .setCancelable(false)
                 .setPositiveButton("Settings",
