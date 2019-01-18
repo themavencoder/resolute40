@@ -63,16 +63,17 @@ public class StartMappingActivity extends AppCompatActivity {
         }
 
         ConnectivityManager conMan = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo.State mobile = conMan.getNetworkInfo(0).getState();
-        NetworkInfo.State wifi = conMan.getNetworkInfo(1).getState();
+        if (Build.VERSION.SDK_INT >= 21) {
+            NetworkInfo.State mobile = conMan.getNetworkInfo(0).getState();
+            NetworkInfo.State wifi = conMan.getNetworkInfo(1).getState();
 
-        if (!(mobile == NetworkInfo.State.CONNECTED || mobile == NetworkInfo.State.CONNECTING || wifi == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTING)) {
-            Snackbar snackbar = errorNetwork("Your network is currently unavailable");
-            snackbar.show();
-            return;
+            if (!(mobile == NetworkInfo.State.CONNECTED || mobile == NetworkInfo.State.CONNECTING || wifi == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTING)) {
+                Snackbar snackbar = errorNetwork("Your network is currently unavailable");
+                snackbar.show();
+                return;
+            }
+
         }
-
-
         if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             startActivity(new Intent(StartMappingActivity.this, MapsActivity.class));

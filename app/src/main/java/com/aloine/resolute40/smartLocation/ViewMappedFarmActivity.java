@@ -1,6 +1,7 @@
 package com.aloine.resolute40.smartLocation;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,8 +19,9 @@ public class ViewMappedFarmActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_mapped_farm);
         Window window = this.getWindow();
-        window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
-
+        if (Build.VERSION.SDK_INT >= 21) {
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+        }
 
     }
 
