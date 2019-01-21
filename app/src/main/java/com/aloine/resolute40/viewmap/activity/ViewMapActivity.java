@@ -3,6 +3,7 @@ package com.aloine.resolute40.viewmap.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.aloine.resolute40.AppInstance;
@@ -20,6 +21,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -39,6 +41,8 @@ public class ViewMapActivity extends FragmentActivity implements OnMapReadyCallb
     private ArrayList<Double> arrLongitude = new ArrayList<>();
     private ArrayList<LatLng> realList = new ArrayList<>();
     private ArrayList<ArrayList<Float>> serverPointsInFloat = new ArrayList<>();
+    private ArrayList<Float> startLatLngInFloat = new ArrayList<>();
+    private ArrayList<Float> endLatLngInFloat = new ArrayList<>();
     private ArrayList<LatLng> serverPointsInLatLng = new ArrayList<>();
 
     private Farmer farmer;
@@ -101,7 +105,14 @@ AppInstance appInstance = AppInstance.getInstance();
         googleMap.addPolyline(polygonOptions);
         // Position the map's camera near Alice Springs in the center of Australia,
         // and set the zoom factor so most of Australia shows on the screen.
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(farmer.getFirst_latitude(), farmer.getFirst_longitude()), 15));
+
+        if (Data.getStartLatLngInFloat().size() > 0) {
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Data.getStartLatLngInFloat().get(0), Data.getStartLatLngInFloat().get(1)), 24));
+            Toast.makeText(this, "The size of this array is " + Data.getStartLatLngInFloat().size(), Toast.LENGTH_SHORT).show();
+            //googleMap.addMarker(new MarkerOptions()).setPosition(new LatLng(Data.getStartLatLngInFloat().get(0),Data.getStartLatLngInFloat().get(1)));
+            googleMap.addMarker(new MarkerOptions().position(new LatLng(Data.getStartLatLngInFloat().get(0),Data.getStartLatLngInFloat().get(1)))
+            .title("Farm location"));
+        }
         googleMap.setBuildingsEnabled(true);
 
         // Set listeners for click events.
@@ -131,8 +142,26 @@ AppInstance appInstance = AppInstance.getInstance();
                     if (response.body().getResponse().equals("success")) {
                         myDialog.dismiss();
                         Toast.makeText(ViewMapActivity.this, "success in request", Toast.LENGTH_SHORT).show();
-                        serverPointsInFloat = response.body().getData();
+                        if (serverPointsInFloat == null) {
+                            Toast.makeText(ViewMapActivity.this, "The serverpoint is null", Toast.LENGTH_SHORT).show();
+                        }
                         if (serverPointsInFloat != null) {
+
+                        }
+                        if (startLatLngInFloat == null) {
+                            Toast.makeText(ViewMapActivity.this, "Start index is null", Toast.LENGTH_SHORT).show();
+                        }
+                         if (startLatLngInFloat != null){
+
+
+                        }
+
+
+                        if (serverPointsInFloat != null) {
+                            serverPointsInFloat = response.body().getData().getBounds();
+                            startLatLngInFloat = response.body().getData().getStart_latlng();
+                            Data.setStartLatLngInFloat(startLatLngInFloat);
+                            Log.i("ArrayListLength", startLatLngInFloat.size() + "");
                             Data.setServerPointsInLatLng(convertToLatLng(serverPointsInFloat));
                            drawMap(googleMap);
 
