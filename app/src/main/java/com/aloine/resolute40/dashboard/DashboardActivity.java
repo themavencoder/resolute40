@@ -170,7 +170,7 @@ public class DashboardActivity extends AppCompatActivity {
                     switch (response.body().getResponse()) {
                         case "success":
                             panicDialog.dismiss();
-                            Snackbar snackbar = success("Your panic was sent to the server");
+                            Snackbar snackbar = success("Your panic was sent to the Resolute 4.0");
 
                             snackbar.show();
 
