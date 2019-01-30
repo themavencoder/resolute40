@@ -206,6 +206,13 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
                     registerFailure();
 
                 }
+
+                if (response.body().getMessage().equals("Phone number exists")) {
+                    dialogFragment.dismiss();
+                    Toast.makeText(RegisterActivity.this, "This phone number has been registered by another user.", Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
                 else {
                     dialogFragment.dismiss();
 

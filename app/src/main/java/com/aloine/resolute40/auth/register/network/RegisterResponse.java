@@ -6,6 +6,9 @@ public class RegisterResponse {
     @SerializedName("response")
     private String response;
 
+    @SerializedName("message")
+    private String message;
+
     @SerializedName("auth_keys")
     private UserReponseData auth_keys;
 
@@ -15,5 +18,9 @@ public class RegisterResponse {
 
     public UserReponseData getAuth_keys() {
         return auth_keys;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }

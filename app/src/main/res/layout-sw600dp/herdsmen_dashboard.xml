@@ -156,7 +156,7 @@
 
                         <TextView
                             android:textAlignment="center"
-                            android:text="Marketplace"
+                            android:text="Vet Aid"
                             android:textColor="@color/white"
                             android:layout_marginTop="8dp"
                             android:layout_gravity="center"
