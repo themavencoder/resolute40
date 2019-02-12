@@ -23,6 +23,9 @@ public class RegisterModel {
     @SerializedName("product_type")
     private String product_type;
 
+    @SerializedName("livestock_population")
+    private String livestock_population;
+
     @SerializedName("state")
     private String state;
 
@@ -31,7 +34,7 @@ public class RegisterModel {
 
     }
 
-    public RegisterModel(String full_name, String state, String phone_number, String community, String product_type, String pin, String user_type) {
+    public RegisterModel(String full_name, String state, String phone_number, String community, String product_type, String pin, String livestock_population, String user_type) {
 
         this.full_name = full_name;
         this.phone = phone_number;
@@ -40,6 +43,7 @@ public class RegisterModel {
         this.user_type = user_type;
         this.product_type = product_type;
         this.state = state;
+        this.livestock_population = livestock_population;
     }
 
     public String getProduct_type() {

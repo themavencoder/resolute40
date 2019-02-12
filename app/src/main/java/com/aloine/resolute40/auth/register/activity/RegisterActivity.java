@@ -114,7 +114,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
                 if (mPresenter.verifyEntries() && !mSpState.getSelectedItem().toString().equals("Select state")) {
                     dialogFragment.setCancelable(false);
                     dialogFragment.show(getSupportFragmentManager(), "my_dialog");
-                     model = new RegisterModel(full_name, mSpState.getSelectedItem().toString(),phone_number,community, productType,pin, "Farmer" );
+                     model = new RegisterModel(full_name, mSpState.getSelectedItem().toString(),phone_number,community, productType,pin, "null", "Farmer" );
 
                     sendUserData(model);
 
