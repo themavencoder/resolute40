@@ -14,17 +14,17 @@ public class PanicDetails {
     private String panic_status;
 
     @SerializedName("lat")
-    private float lat;
+    private double lat;
 
     @SerializedName("lng")
-    private float lng;
+    private double lng;
 
 
     public PanicDetails() {
 
     }
 
-    public PanicDetails(String username, String details, String panic_status, float lat, float lng) {
+    public PanicDetails(String username, String details, String panic_status, double lat, double lng) {
         this.username = username;
         this.details =details;
         this.panic_status = panic_status;

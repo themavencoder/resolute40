@@ -2,6 +2,7 @@ package com.aloine.resolute40.dashboard;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -29,6 +30,8 @@ import com.aloine.resolute40.panicalert.network.ApiService;
 import com.aloine.resolute40.smartLocation.StartMappingActivity;
 import com.aloine.resolute40.viewmap.activity.ViewMapActivity;
 
+import io.nlopez.smartlocation.OnLocationUpdatedListener;
+import io.nlopez.smartlocation.SmartLocation;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,6 +42,7 @@ public class DashboardActivity extends AppCompatActivity {
     private PanicDialog panicDialog;
     private CoordinatorLayout mCoordinatorLayout;
     private Boolean b;
+    public double d_lat, d_long;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +74,7 @@ public class DashboardActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 */
+       getLocation();
 
     }
 
@@ -99,7 +104,11 @@ public class DashboardActivity extends AppCompatActivity {
                                 panicDialog.show(getSupportFragmentManager(), "my_dialog");
                                 AppInstance app = AppInstance.getInstance();
                                 Keys keys = new Keys(app.getClient_token(), app.getSession_token());
-                                PanicDetails panicDetails = new PanicDetails(app.getUsername(), "A panic has been sent", "True", 0.0f, 0.0f);
+                                if (d_lat == 0.0 && d_long == 0.0) {
+                                    Toast.makeText(DashboardActivity.this, "Unable to get location, try again", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                                PanicDetails panicDetails = new PanicDetails(app.getUsername(), "A panic has been sent", "True", d_lat, d_long);
                                 PanicData panicData = new PanicData(keys, panicDetails, app.getUsertype());
                                 panicNetworkRequest(panicData);
                                 break;
@@ -136,6 +145,17 @@ public class DashboardActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+    private void getLocation() {
+        SmartLocation.with(this).location().getLastLocation();
+        SmartLocation.with(this).location().start(new OnLocationUpdatedListener() {
+            @Override
+            public void onLocationUpdated(Location location) {
+                d_lat = location.getLatitude();
+                d_long = location.getLongitude();
+
+            }
+        });
     }
 
     private void hideNavigationBar() {
