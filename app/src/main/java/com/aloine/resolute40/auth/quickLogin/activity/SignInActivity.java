@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.aloine.resolute40.AppInstance;
 import com.aloine.resolute40.R;
+import com.aloine.resolute40.auth.formalLogin.activity.FormalSignInActivity;
 import com.aloine.resolute40.auth.quickLogin.contract.LoginContract;
 import com.aloine.resolute40.auth.quickLogin.dialog.LoginDialog;
 import com.aloine.resolute40.auth.quickLogin.model.LoginModel;
@@ -210,7 +211,7 @@ public class SignInActivity extends AppCompatActivity implements LoginContract.V
         params.gravity = Gravity.TOP;
         sbView.setLayoutParams(params);
         sbView.setBackgroundColor(Color.RED);
-        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+        TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(getResources().getColor(R.color.white));
     }
 
@@ -232,5 +233,10 @@ public class SignInActivity extends AppCompatActivity implements LoginContract.V
         sbView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(getResources().getColor(R.color.white));
+    }
+
+    public void textviewSignIn(View view) {
+        Intent intent = new Intent(this,FormalSignInActivity.class);
+        startActivity(intent);
     }
 }

@@ -40,7 +40,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity implements RegisterContract.View {
-    private EditText mEtName, mEtPhone, mEtCommunity, mEtPin;
+    private EditText mEtName, mEtPhone, mEtCommunity, mEtPin, mEtProductType;
     private Spinner mSpStatus;
     private TextView mTvSignIn;
     private Button mButtonReg;
@@ -161,6 +161,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
         mEtPhone = findViewById(R.id.edit_phone_number);
         mEtCommunity = findViewById(R.id.edit_community);
         mEtPin = findViewById(R.id.edit_pin);
+        mEtProductType = findViewById(R.id.edit_product_type);
         mTvSignIn = findViewById(R.id.text_sign_in);
         mButtonReg = findViewById(R.id.button_register);
         mCoordinatorLayout = findViewById(R.id.coordinatorLayout);

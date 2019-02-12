@@ -25,5 +25,10 @@
     <style name="SpinnerTheme" parent="android:Widget.Spinner">
         <item name="android:background">@drawable/spinner_background</item>
     </style>
+    <style name="spinnerDropDownItemStyle" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+
+    </style>
+    <style name="spinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">
+    </style>
 
 </resources>
