@@ -27,7 +27,7 @@ public class RegisterPresenter implements RegisterContract.Presenter {
 
     @Override
     public boolean verifyEntries() {
-        if (!model.getCommunity().isEmpty() && !model.getFull_name().isEmpty() && model.getPhone().length() == 11 && model.getPin().length() == 4) {
+        if (!model.getCommunity().isEmpty() &&!model.getProduct_type().isEmpty() && !model.getFull_name().isEmpty() && model.getPhone().length() == 11 && model.getPin().length() == 4) {
 
             return true;
         }
@@ -37,10 +37,11 @@ public class RegisterPresenter implements RegisterContract.Presenter {
     }
 
     @Override
-    public void insertData(String fullName, String phone, String community, String pin) {
+    public void insertData(String fullName, String phone, String community, String pin, String productType) {
         model.setFull_name(fullName);
         model.setPhone(phone);
         model.setCommunity(community);
         model.setPin(pin);
+        model.setProduct_type(productType);
     }
 }

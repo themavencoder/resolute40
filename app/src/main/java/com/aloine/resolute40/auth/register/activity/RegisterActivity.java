@@ -25,7 +25,6 @@ import android.widget.Toast;
 import com.aloine.resolute40.AppInstance;
 import com.aloine.resolute40.R;
 import com.aloine.resolute40.auth.formalLogin.activity.FormalSignInActivity;
-import com.aloine.resolute40.auth.quickLogin.activity.SignInActivity;
 import com.aloine.resolute40.auth.register.contract.RegisterContract;
 import com.aloine.resolute40.auth.register.database.table.Farmer;
 import com.aloine.resolute40.auth.register.model.RegisterModel;
@@ -41,7 +40,7 @@ import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity implements RegisterContract.View {
     private EditText mEtName, mEtPhone, mEtCommunity, mEtPin, mEtProductType;
-    private Spinner mSpStatus;
+    private Spinner mSpState;
     private TextView mTvSignIn;
     private Button mButtonReg;
     private RegisterContract.Presenter mPresenter;
@@ -109,12 +108,13 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
                 String community = mEtCommunity.getText().toString();
                 String phone_number = mEtPhone.getText().toString();
                 String pin = mEtPin.getText().toString();
-                mPresenter.insertData(full_name, phone_number,community, pin);
+                String productType = mEtProductType.getText().toString();
+                mPresenter.insertData(full_name, phone_number,community, pin,productType);
 
-                if (mPresenter.verifyEntries() && !mSpStatus.getSelectedItem().toString().equals("Select type")) {
+                if (mPresenter.verifyEntries() && !mSpState.getSelectedItem().toString().equals("Select state")) {
                     dialogFragment.setCancelable(false);
                     dialogFragment.show(getSupportFragmentManager(), "my_dialog");
-                     model = new RegisterModel(full_name,phone_number,community,pin,mSpStatus.getSelectedItem().toString());
+                     model = new RegisterModel(full_name, mSpState.getSelectedItem().toString(),phone_number,community, productType,pin, "Farmer" );
 
                     sendUserData(model);
 
@@ -155,8 +155,8 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
     }
 
     private void init() {
-        mSpStatus = findViewById(R.id.spin_status);
-        mSpStatus.getBackground().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+        mSpState = findViewById(R.id.spin_status);
+        mSpState.getBackground().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
         mEtName = findViewById(R.id.edit_full_name);
         mEtPhone = findViewById(R.id.edit_phone_number);
         mEtCommunity = findViewById(R.id.edit_community);
@@ -168,7 +168,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
         dialogFragment = new DialogFragment();
         ArrayAdapter<CharSequence> statusAdapter = ArrayAdapter.createFromResource(this, R.array.Status, R.layout.spinner_item);
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mSpStatus.setAdapter(statusAdapter);
+        mSpState.setAdapter(statusAdapter);
     }
 
 

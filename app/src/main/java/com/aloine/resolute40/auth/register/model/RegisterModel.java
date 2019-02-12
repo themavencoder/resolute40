@@ -20,18 +20,34 @@ public class RegisterModel {
     @SerializedName("user_type")
     private String user_type;
 
+    @SerializedName("product_type")
+    private String product_type;
+
+    @SerializedName("state")
+    private String state;
+
     public RegisterModel() {
 
 
     }
 
-    public RegisterModel(String full_name, String phone_number, String community, String pin, String user_type) {
+    public RegisterModel(String full_name, String state, String phone_number, String community, String product_type, String pin, String user_type) {
 
         this.full_name = full_name;
         this.phone = phone_number;
         this.community = community;
         this.pin = pin;
         this.user_type = user_type;
+        this.product_type = product_type;
+        this.state = state;
+    }
+
+    public String getProduct_type() {
+        return product_type;
+    }
+
+    public void setProduct_type(String product_type) {
+        this.product_type = product_type;
     }
 
     public String getUser_type() {

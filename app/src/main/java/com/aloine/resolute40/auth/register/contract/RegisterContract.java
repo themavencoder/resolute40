@@ -13,7 +13,7 @@ public interface RegisterContract {
         void loadNextScreen();
         void loadSignInScreen();
         boolean verifyEntries();
-        void insertData(String fullName, String phone, String community, String pin);
+        void insertData(String fullName, String phone, String community, String pin, String productType);
 
     }
 }
