@@ -100,12 +100,14 @@ public class DashboardActivity extends AppCompatActivity {
                                 startActivity(new Intent(DashboardActivity.this, StartMappingActivity.class));
                                 break;
                             case 1:
+                                getLocation();
                                 panicDialog.setCancelable(false);
                                 panicDialog.show(getSupportFragmentManager(), "my_dialog");
                                 AppInstance app = AppInstance.getInstance();
                                 Keys keys = new Keys(app.getClient_token(), app.getSession_token());
                                 if (d_lat == 0.0 && d_long == 0.0) {
                                     Toast.makeText(DashboardActivity.this, "Unable to get location, try again", Toast.LENGTH_SHORT).show();
+                                    panicDialog.dismiss();
                                     return;
                                 }
                                 PanicDetails panicDetails = new PanicDetails(app.getUsername(), "A panic has been sent", "True", d_lat, d_long);
@@ -153,6 +155,9 @@ public class DashboardActivity extends AppCompatActivity {
             public void onLocationUpdated(Location location) {
                 d_lat = location.getLatitude();
                 d_long = location.getLongitude();
+                Log.d("LOCATIONOFMAP",String.valueOf(d_lat));
+                Log.d("LOCATIONOFMAP",String.valueOf(d_long));
+                Toast.makeText(DashboardActivity.this, "The longitude is " + d_long + "the latitude is " + d_lat , Toast.LENGTH_SHORT).show();
 
             }
         });

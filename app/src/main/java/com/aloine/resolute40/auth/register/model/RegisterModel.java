@@ -20,7 +20,7 @@ public class RegisterModel {
     @SerializedName("user_type")
     private String user_type;
 
-    @SerializedName("product_type")
+    @SerializedName("product_types")
     private String product_type;
 
     @SerializedName("livestock_population")
