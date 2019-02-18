@@ -157,7 +157,7 @@ public class DashboardActivity extends AppCompatActivity {
                 d_long = location.getLongitude();
                 Log.d("LOCATIONOFMAP",String.valueOf(d_lat));
                 Log.d("LOCATIONOFMAP",String.valueOf(d_long));
-                Toast.makeText(DashboardActivity.this, "The longitude is " + d_long + "the latitude is " + d_lat , Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(DashboardActivity.this, "The longitude is " + d_long + "the latitude is " + d_lat , Toast.LENGTH_SHORT).show();
 
             }
         });
