@@ -100,7 +100,7 @@ android:layout_height="match_parent">
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:src="@drawable/ic_map"
+                        android:src="@drawable/ic_location"
                         android:layout_gravity="center_horizontal"
                         android:layout_width="100dp"
                         android:layout_height="60dp" />
@@ -142,7 +142,7 @@ android:layout_height="match_parent">
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:src="@drawable/ic_placeholder"
+                        android:src="@drawable/ic_panic"
                         android:layout_gravity="center_horizontal"
                         android:layout_width="100dp"
                         android:layout_height="60dp" />
@@ -186,7 +186,7 @@ android:layout_height="match_parent">
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:src="@drawable/ic_map_farm"
+                        android:src="@drawable/ic_world"
                         android:layout_gravity="center_horizontal"
                         android:layout_width="100dp"
                         android:layout_height="60dp" />
@@ -227,7 +227,7 @@ android:layout_height="match_parent">
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:src="@drawable/ic_map_farm"
+                        android:src="@drawable/ic_bag"
                         android:layout_gravity="center_horizontal"
                         android:layout_width="100dp"
                         android:layout_height="60dp" />

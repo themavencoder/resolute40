@@ -28,9 +28,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="267187" />
-                            <entry key="outputName" value="ic_arrow_drop_down_black_24dp" />
-                            <entry key="sourceFile" value="C:\Users\Aloine_Inc\Downloads\placeholder.svg" />
+                            <entry key="outputName" value="ic_panic" />
+                            <entry key="sourceFile" value="C:\Users\Aloine_Inc\Downloads\panic.svg" />
                           </map>
                         </option>
                       </PersistentState>

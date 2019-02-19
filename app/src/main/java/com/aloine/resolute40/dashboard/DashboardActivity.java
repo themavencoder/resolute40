@@ -148,6 +148,7 @@ public class DashboardActivity extends AppCompatActivity {
             });
         }
     }
+    
     private void getLocation() {
         SmartLocation.with(this).location().getLastLocation();
         SmartLocation.with(this).location().start(new OnLocationUpdatedListener() {
