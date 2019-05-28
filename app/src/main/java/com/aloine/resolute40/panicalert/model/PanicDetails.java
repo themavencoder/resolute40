@@ -1,8 +1,11 @@
 package com.aloine.resolute40.panicalert.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class PanicDetails {
+public class PanicDetails implements Parcelable {
 
     @SerializedName("username")
     private String username;
@@ -30,5 +33,39 @@ public class PanicDetails {
         this.panic_status = panic_status;
         this.lat = lat;
         this.lng = lng;
+    }
+
+    protected PanicDetails(Parcel in) {
+        username = in.readString();
+        details = in.readString();
+        panic_status = in.readString();
+        lat = in.readDouble();
+        lng = in.readDouble();
+    }
+
+    public static final Creator<PanicDetails> CREATOR = new Creator<PanicDetails>() {
+        @Override
+        public PanicDetails createFromParcel(Parcel in) {
+            return new PanicDetails(in);
+        }
+
+        @Override
+        public PanicDetails[] newArray(int size) {
+            return new PanicDetails[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(username);
+        dest.writeString(details);
+        dest.writeString(panic_status);
+        dest.writeDouble(lat);
+        dest.writeDouble(lng);
     }
 }

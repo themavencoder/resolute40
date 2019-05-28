@@ -79,11 +79,6 @@ public class MapsActivity extends AppCompatActivity {
 
     }
 
-    /*private void init() {
-        latitude = findViewById(R.id.latitude);
-        longitude = findViewById(R.id.longitude);
-    }*/
-
 
     public void getLocation(View view) {
 

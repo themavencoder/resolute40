@@ -1,6 +1,9 @@
 package com.aloine.resolute40;
 
+import com.aloine.resolute40.auth.register.database.table.Farmer;
+import com.aloine.resolute40.auth.register.database.table.Farmer_Table;
 import com.google.android.gms.maps.model.LatLng;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +22,8 @@ public class AppInstance {
     private String session_token;
     private String username;
     private String usertype;
+    private Farmer farmer;
+
 
     private ArrayList<ArrayList<Float>> pointsToServer = new ArrayList<>();
 
@@ -43,7 +48,13 @@ return sInstance;
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        farmer = SQLite.select().from(Farmer.class).where(Farmer_Table.id.eq(1)).querySingle();
+        if (farmer.getPhone_number() != null) {
+            this.username = farmer.getPhone_number();
+        } else {
+            this.username = username;
+        }
+
     }
 
     public void setPointsToServer(ArrayList<ArrayList<Float>> pointsToServer) {

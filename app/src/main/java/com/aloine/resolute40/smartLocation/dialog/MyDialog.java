@@ -15,15 +15,20 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.aloine.resolute40.AppInstance;
+import com.aloine.resolute40.MainActivity;
 import com.aloine.resolute40.R;
+import com.aloine.resolute40.auth.register.database.table.Farmer;
+import com.aloine.resolute40.auth.register.database.table.Farmer_Table;
 import com.aloine.resolute40.auth.register.network.Client;
 import com.aloine.resolute40.dashboard.DashboardActivity;
+import com.aloine.resolute40.smartLocation.MapsActivity;
 import com.aloine.resolute40.smartLocation.StartMappingActivity;
 import com.aloine.resolute40.smartLocation.ViewMappedFarmActivity;
 import com.aloine.resolute40.smartLocation.model.Keys;
 import com.aloine.resolute40.smartLocation.model.PostLocationData;
 import com.aloine.resolute40.smartLocation.network.ApiService;
 import com.aloine.resolute40.smartLocation.network.PostLocationResponse;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import io.nlopez.smartlocation.SmartLocation;
 import retrofit2.Call;
@@ -35,16 +40,24 @@ import static com.aloine.resolute40.smartLocation.MapsActivity.points;
 public class MyDialog extends DialogFragment {
     private ApiService mApiService;
     private  View v;
+    private Farmer farmer;
+    private MapsActivity activity;
+
+
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
 
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
          v = inflater.inflate(R.layout.custom_dialog_layout,null);
+
+        activity = new MapsActivity();
         builder.setView(v);
+
 
 
 

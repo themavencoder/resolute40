@@ -65,6 +65,7 @@ public class SignInActivity extends AppCompatActivity implements LoginContract.V
         farmer = SQLite.select().from(Farmer.class).where(Farmer_Table.id.eq(1)).querySingle();
        SharedPreferences sharedPreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
 
+
         if (sharedPreferences.contains(userName)) {
             app.setUsername(sharedPreferences.getString(userName,""));
 
@@ -135,7 +136,8 @@ public class SignInActivity extends AppCompatActivity implements LoginContract.V
                 mLoginDialog.setCancelable(false);
                 mLoginDialog.show(getSupportFragmentManager(), "my_dialog");
              //   Toast.makeText(SignInActivity.this, "shared pref" + app.getUsername(), Toast.LENGTH_SHORT).show();
-                model = new LoginModel(app.getUsername(),mPresenter.concatPin());
+                model = new LoginModel(farmer.getPhone_number(),mPresenter.concatPin());
+                Toast.makeText(SignInActivity.this, farmer.getPhone_number(), Toast.LENGTH_SHORT).show();
                 performNetworkLogin(model);
 
 
@@ -163,6 +165,7 @@ public class SignInActivity extends AppCompatActivity implements LoginContract.V
                         app.setClient_token(response.body().getAuth_keys().getClient_token());
                         app.setSession_token(response.body().getAuth_keys().getSession_token());
                         app.setUsertype(response.body().getUser_type());
+                        app.setUsername(farmer.getPhone_number());
                        // Toast toast = Toast.makeText(SignInActivity.this,"The session token is " + app.getSession_token() + "and client token is " + app.getClient_token(),Toast.LENGTH_LONG);
                        // toast.setGravity(Gravity.CENTER,0,0);
                       //  toast.show();

@@ -21,10 +21,12 @@ import android.widget.Toast;
 import com.aloine.resolute40.AppInstance;
 import com.aloine.resolute40.R;
 import com.aloine.resolute40.auth.register.database.table.Farmer;
+import com.aloine.resolute40.auth.register.database.table.Farmer_Table;
 import com.aloine.resolute40.smartLocation.dialog.MyDialog;
 import com.github.ybq.android.spinkit.style.DoubleBounce;
 import com.google.android.gms.location.DetectedActivity;
 import com.google.android.gms.maps.model.LatLng;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +61,7 @@ public class MapsActivity extends AppCompatActivity {
     private CoordinatorLayout mCoordinatorLayout;
     public static int points = 0;
 
+
     private ArrayList<ArrayList<Float>> pointsToServer = new ArrayList<>();
 
     @Override
@@ -70,7 +73,12 @@ public class MapsActivity extends AppCompatActivity {
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         }
         button = findViewById(R.id.btn_pause);
+
+
         init();
+
+
+
        /*progressBar = findViewById(R.id.spin_kit);
 
        doubleBounce = new DoubleBounce();
@@ -219,6 +227,8 @@ public class MapsActivity extends AppCompatActivity {
         textView.setTextColor(getResources().getColor(R.color.white));
         return snackbar;
     }
+
+
 }
 
 

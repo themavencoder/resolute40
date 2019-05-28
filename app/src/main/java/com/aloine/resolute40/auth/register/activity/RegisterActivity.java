@@ -197,7 +197,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
                     farmer.setId(1);
                     farmer.setPhone_number(mEtPhone.getText().toString());
                     farmer.save();
-
+                    app.setUsername(mEtPhone.getText().toString());
                     Toast.makeText(RegisterActivity.this, "Registration status:" + response.body().getResponse(), Toast.LENGTH_SHORT).show();
                     mPresenter.loadNextScreen();
                 }

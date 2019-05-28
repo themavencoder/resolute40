@@ -48,6 +48,7 @@ public class ViewMapActivity extends FragmentActivity implements OnMapReadyCallb
     private Farmer farmer;
     private ApiService mApiService;
     private MyDialog myDialog;
+    private AppInstance app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +57,11 @@ public class ViewMapActivity extends FragmentActivity implements OnMapReadyCallb
         myDialog = new MyDialog();
         myDialog.setCancelable(false);
         myDialog.show(getSupportFragmentManager(), "my_dialog");
-        farmer = SQLite.select().from(Farmer.class).where(Farmer_Table.id.eq(1)).querySingle();
+    app = AppInstance.getInstance();
 
       //  String username = farmer.getPhone_number();
         //Toast.makeText(this, "Is the phone number" +username, Toast.LENGTH_SHORT).show();
-AppInstance appInstance = AppInstance.getInstance();
-        getMap(appInstance.getUsername());
+    getMap(app.getUsername());
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
 
@@ -107,7 +107,7 @@ AppInstance appInstance = AppInstance.getInstance();
         // and set the zoom factor so most of Australia shows on the screen.
 
         if (Data.getStartLatLngInFloat().size() > 0) {
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Data.getStartLatLngInFloat().get(0), Data.getStartLatLngInFloat().get(1)), 24));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Data.getStartLatLngInFloat().get(0), Data.getStartLatLngInFloat().get(1)), 16));
             Toast.makeText(this, "The size of this array is " + Data.getStartLatLngInFloat().size(), Toast.LENGTH_SHORT).show();
             //googleMap.addMarker(new MarkerOptions()).setPosition(new LatLng(Data.getStartLatLngInFloat().get(0),Data.getStartLatLngInFloat().get(1)));
             googleMap.addMarker(new MarkerOptions().position(new LatLng(Data.getStartLatLngInFloat().get(0),Data.getStartLatLngInFloat().get(1)))

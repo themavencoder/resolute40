@@ -28,6 +28,7 @@ import com.aloine.resolute40.auth.quickLogin.model.LoginModel;
 import com.aloine.resolute40.auth.quickLogin.network.ApiService;
 import com.aloine.resolute40.auth.quickLogin.network.LoginResponse;
 import com.aloine.resolute40.auth.register.activity.RegisterActivity;
+import com.aloine.resolute40.auth.register.database.table.Farmer;
 import com.aloine.resolute40.auth.register.network.Client;
 import com.aloine.resolute40.dashboard.DashboardActivity;
 
@@ -46,15 +47,19 @@ public class FormalSignInActivity extends AppCompatActivity implements FormalCon
     private LoginDialog mLoginDialog;
     private ApiService mApiService;
     private LoginModel model;
+    private Farmer farmer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formal_sign_in);
+        farmer = new Farmer();
         statusColor();
         flags();
         init();
         signIn();
+
 
 
     }
@@ -145,6 +150,9 @@ public class FormalSignInActivity extends AppCompatActivity implements FormalCon
                 switch (response.body().getResponse()) {
                     case "success":
                         mLoginDialog.dismiss();
+                        farmer.setId(1);
+                        farmer.setPhone_number(mEtPhone.getText().toString());
+                        farmer.save();
                         AppInstance app = AppInstance.getInstance();
                         app.setUsername(mEtPhone.getText().toString());
                         app.setClient_token(response.body().getAuth_keys().getClient_token());
