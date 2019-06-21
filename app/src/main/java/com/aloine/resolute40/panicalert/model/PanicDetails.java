@@ -68,4 +68,17 @@ public class PanicDetails implements Parcelable {
         dest.writeDouble(lat);
         dest.writeDouble(lng);
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPanic_status() {
+        return panic_status;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
 }

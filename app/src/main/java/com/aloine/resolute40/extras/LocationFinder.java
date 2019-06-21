@@ -18,6 +18,7 @@ import android.location.LocationManager;
 import android.os.Binder;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -82,6 +83,8 @@ public class LocationFinder extends Service implements LocationListener {
     private Keys keys;
     private String userType;
     private final IBinder mBinder = new MyBinder();
+    private String pUsername, pDetails, pStatus;
+    private Double changingLatitude, changingLongitude;
 
 
     public LocationFinder() {
@@ -107,7 +110,9 @@ public class LocationFinder extends Service implements LocationListener {
         //    panicData = intent.getParcelableExtra(PANIC_DATA_KEY);
             userType = intent.getStringExtra(USER_TYPE);
             panicDetails = intent.getParcelableExtra(PANIC_DETAILS_KEY);
-
+            pUsername = panicDetails.getUsername();
+            pDetails = panicDetails.getDetails();
+            pStatus =panicDetails.getPanic_status();
             keys = intent.getParcelableExtra(PANIC_KEYS);
             switch (action) {
                 case ACTION_START_FOREGROUND_SERVICE:
@@ -135,8 +140,8 @@ public class LocationFinder extends Service implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
-        latitude = location.getLatitude();
-        longitude = location.getLongitude();
+        changingLatitude = location.getLatitude();
+        changingLongitude = location.getLongitude();
 
     }
 
@@ -174,7 +179,8 @@ public class LocationFinder extends Service implements LocationListener {
                             LocationManager.NETWORK_PROVIDER,
                             MIN_TIME_BW_UPDATES,
                             MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-                    panicNetworkRequest(new PanicData(keys,panicDetails,userType));
+               //     panicNetworkRequest(new PanicData(keys,panicDetails,userType));
+                    panicNetworkRequest(new PanicData(keys,new PanicDetails(pUsername,pDetails,pStatus,changingLatitude,changingLongitude),userType));
                     sendMessageToUi(String.valueOf(latitude), String.valueOf(longitude));
                     // Log.e(“Network”, “Network”);
                     if (locationManager != null) {
@@ -183,7 +189,8 @@ public class LocationFinder extends Service implements LocationListener {
                         if (location != null) {
                             latitude = location.getLatitude();
                             longitude = location.getLongitude();
-                            panicNetworkRequest(new PanicData(keys,panicDetails,userType));
+                          //  panicNetworkRequest(new PanicData(keys,panicDetails,userType));
+                            panicNetworkRequest(new PanicData(keys,new PanicDetails(pUsername,pDetails,pStatus,changingLatitude,changingLongitude),userType));
                             sendMessageToUi(String.valueOf(latitude), String.valueOf(longitude));
                         }
                     }
@@ -193,7 +200,8 @@ public class LocationFinder extends Service implements LocationListener {
                                 LocationManager.GPS_PROVIDER,
                                 MIN_TIME_BW_UPDATES,
                                 MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-                        panicNetworkRequest(new PanicData(keys,panicDetails,userType));
+                      //  panicNetworkRequest(new PanicData(keys,panicDetails,userType));
+                        panicNetworkRequest(new PanicData(keys,new PanicDetails(pUsername,pDetails,pStatus,changingLatitude,changingLongitude),userType));
                         sendMessageToUi(String.valueOf(latitude), String.valueOf(longitude));
                         if (location == null) {
 
@@ -205,7 +213,8 @@ public class LocationFinder extends Service implements LocationListener {
                                     latitude = location.getLatitude();
                                     longitude = location.getLongitude();
                                     Toast.makeText(getApplicationContext(), "The latitude is " + latitude + " and longitude is" + longitude, Toast.LENGTH_SHORT).show();
-                                    panicNetworkRequest(new PanicData(keys,panicDetails,userType));
+                                 //   panicNetworkRequest(new PanicData(keys,panicDetails,userType));
+                                    panicNetworkRequest(new PanicData(keys,new PanicDetails(pUsername,pDetails,pStatus,changingLatitude,changingLongitude),userType));
 
                                     sendMessageToUi(String.valueOf(latitude), String.valueOf(longitude));
                                 }
@@ -351,11 +360,22 @@ String channel;
         builder.setFullScreenIntent(pendingIntent, true);
 
         // Build the notification.
-        Notification notification = builder.build();
+        final Notification notification = builder.build();
 
         // Start foreground service.
-        startForeground(1, notification);
-        getLocation();
+
+        final Handler handler = new Handler();
+        final int delay = 15000; //milliseconds
+
+        handler.postDelayed(new Runnable(){
+            public void run(){
+                //do something
+                startForeground(1, notification);
+                getLocation();
+                handler.postDelayed(this, delay);
+            }
+        }, delay);
+
     }
 
     private void stopForegroundService() {
